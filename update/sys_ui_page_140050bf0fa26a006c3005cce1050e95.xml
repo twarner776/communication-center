@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_wec_communicatio_comm_security_description.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+Dear TWC Employees,
+
+We are currently experiencing a security threat that is attempting to target TWC employees and want to make you aware of this particular security threat. You may have some of the following questions regarding this particular security threat.
+
+Make sure that you know and trust the attachments that you open!!!
+
+What is the type of threat that we are currently experiencing?
+
+What does this threat try to do?
+
+What does this particular threat look like?
+
+What should I do now?
+
+If you receive an email from this address, please delete the email immediately.  If you believe you may have opened this email by accident or put in any personal details, please forward the email to the following email address:  malwarealerts@weather.com.
+
+
+The best way to assist in preventing the spread of this particular malware is to follow specific safety steps. We ask that you follow these rules at all times, but now is a great time to review those safety practices.
+Make sure that you know and trust the attachments that you open!!! Malware has the ability to mimic trusted sources so before you open a document, please confirm with the sender that they actually did send a particular document. 
+Avoid opening emails with requests that seem to be completely out of the blue. If there is no reason for you to receive a random survey from a company you do not work with on an everyday basis, please be very skeptical of the email. One example: Service providers such as FedEx and UPS will not send a "your package has been lost" message via email. Tracking numbers and customer reps - but not PDF documents - would be involved.
+
+Summary
+Malware is most effective when it is able to mimic a trusted source and trick you into believing that you are receiving a standard work attachment. Please use consideration with all attachments that you receive and that will be the best defence in keeping our network free from this and any future malware.
+	
+	
+</j:jelly>]]></html>
+        <name>comm_security_description</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-25 09:17:09</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>140050bf0fa26a006c3005cce1050e95</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>comm_security_description</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_page_140050bf0fa26a006c3005cce1050e95</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-10-25 09:27:40</sys_updated_on>
+    </sys_ui_page>
+</record_update>

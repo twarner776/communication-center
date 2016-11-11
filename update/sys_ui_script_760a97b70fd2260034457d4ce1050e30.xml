@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_wec_communicatio.PreviewNotification-d</name>
+        <script><![CDATA[(function(){
+    'use strict';
+
+    angular
+        .module('twc-product')
+        .directive('previewNotification', PreviewNotification)
+        .controller('PreviewNotificationCtrl', PreviewNotificationCtrl);
+
+    PreviewNotificationCtrl.$inject = ['$scope', 'FieldByTypeFactory'];
+
+    function PreviewNotification() {
+        var directive = {
+            bindToController: true,
+            transclude: true,
+            controller: 'PreviewNotificationCtrl',
+            controllerAs: 'vm',
+            restrict: 'EA',
+            templateUrl: '/x_wec_communicatio_preview-notification.do',
+            scope: {
+                item: '=item'
+            }
+        };
+        return directive;
+    }
+
+    function PreviewNotificationCtrl($scope, FieldByTypeFactory){
+        var vm = this;
+		
+		$scope.$watch('vm.item.u_notification_type', function (value) {
+		  if (typeof value !== 'undefined' && value.value) {
+			  
+			vm.showFields = {};
+			FieldByTypeFactory[vm.item.u_notification_type.value].forEach(function(f){
+				vm.showFields[f] = true;
+			});
+			  
+		  } 
+		}, true);
+    }
+
+})();
+]]></script>
+        <script_name>PreviewNotification-directive</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-13 13:46:29</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>760a97b70fd2260034457d4ce1050e30</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>x_wec_communicatio.PreviewNotification-d</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_script_760a97b70fd2260034457d4ce1050e30</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-10-13 13:54:57</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

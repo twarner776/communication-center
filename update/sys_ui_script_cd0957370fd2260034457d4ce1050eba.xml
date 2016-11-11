@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_wec_communicatio.FieldByTypeFactory</name>
+        <script><![CDATA[(function () {
+    'use strict';
+
+    angular
+        .module('twc-product')
+        .factory('FieldByTypeFactory', FieldByTypeFactory);
+
+    function FieldByTypeFactory() {
+		
+		return {
+			Incident: ['number', 'title', 'u_current_status', 'u_servicenow_ticket', 'u_incident_ticket_priority', 'u_incident_owner', 'u_resolution_time', 'u_mttr', 'u_incident_source', 'u_product', 'u_location', 'u_bridge_status', 'u_slack_channel', 'u_description', 'u_impact', 'u_latest_info', 'u_next_step', 'u_incident_history', 'u_sms_title', 'u_sms_priority', 'u_sms_description', 'u_sms_incident_ticket', 'u_slack_channel', 'u_slack_title', 'u_slack_priority', 'u_slack_description', 'u_slack_incident_ticket', 'u_incident_start', 'u_public_slack_channel'],
+			Maintenance: ['number', 'title', 'u_current_status', 'u_servicenow_ticket', 'u_description', 'u_impact', 'u_maintenance_poc', 'u_latest_info', 'u_next_step', 'u_maintenance_start_time', 'u_maintenance_projected_end_time', 'u_actual_maintenance_end_time', 'u_maintenance_history', 'u_rfc', 'u_maintenance_history', 'u_sms_title', 'u_sms_priority', 'u_sms_description', 'u_slack_channel', 'u_slack_title', 'u_slack_priority', 'u_slack_description', 'u_location', 'u_public_slack_channel'],
+			Informational: ['number', 'title', 'u_current_status', 'u_product_independent', 'u_location', 'u_description', 'u_latest_info', 'u_sms_title', 'u_sms_priority', 'u_sms_description', 'u_slack_channel', 'u_slack_title', 'u_slack_priority', 'u_slack_description', 'u_public_slack_channel'],
+			'Security (Phishing)': ['number', 'title', 'u_description', 'u_sms_title', 'u_sms_priority', 'u_sms_description', 'u_slack_channel', 'u_slack_title', 'u_slack_priority', 'u_slack_description', 'u_public_slack_channel'],
+			'External Premium Support': ['number', 'title', 'u_description', 'u_sms_title', 'u_sms_priority', 'u_sms_description', 'u_slack_channel', 'u_slack_title', 'u_slack_priority', 'u_slack_description', 'u_public_slack_channel'],
+			'Business Continuity': ['number', 'title', 'u_description', 'u_sms_title', 'u_sms_priority', 'u_sms_description', 'u_slack_channel', 'u_slack_title', 'u_slack_priority', 'u_slack_description', 'u_public_slack_channel'],
+			'Change Freeze': ['number', 'title', 'u_current_status', 'u_description', 'u_location', 'u_latest_info', 'u_sms_title', 'u_sms_priority', 'u_sms_description', 'u_slack_channel', 'u_slack_title', 'u_slack_priority', 'u_slack_description', 'u_maintenance_start_time', 'u_maintenance_projected_end_time', 'u_actual_maintenance_end_time', 'u_change_display', 'u_public_slack_channel'],
+			'General': ['number', 'title', 'u_text_field_1', 'u_text_field_2', 'u_text_field_3', 'u_text_field_4', 'u_text_field_5', 'u_text_field_6', 'u_sms_title', 'u_sms_priority', 'u_sms_description', 'u_slack_channel', 'u_slack_title', 'u_slack_priority', 'u_slack_description', 'u_public_slack_channel'],
+			'Trust Site': ['number', 'title', 'u_record', 'u_product_independent', 'u_description', 'u_trust_site_status']
+			
+		}
+
+    }
+
+})();
+]]></script>
+        <script_name>FieldByTypeFactory</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-13 13:40:05</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>cd0957370fd2260034457d4ce1050eba</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>x_wec_communicatio.FieldByTypeFactory</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_script_cd0957370fd2260034457d4ce1050eba</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-10 14:16:35</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

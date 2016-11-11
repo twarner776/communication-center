@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_list parent="sys_ws_definition" relationship="" sys_domain="global" table="sys_ws_operation" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>name</element>
+            <list_id display_value="sys_ws_operation" element="NULL" name="sys_ws_operation" parent="sys_ws_definition" relationship="NULL" sys_domain="global" view="Default view">6543c3129f333100cf4696fcc67fcf6a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2015-05-05 21:13:02</sys_created_on>
+            <sys_id>e543c3129f333100cf4696fcc67fcf6a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2015-05-05 21:13:02</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>http_method</element>
+            <list_id display_value="sys_ws_operation" element="NULL" name="sys_ws_operation" parent="sys_ws_definition" relationship="NULL" sys_domain="global" view="Default view">6543c3129f333100cf4696fcc67fcf6a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2015-05-05 21:13:02</sys_created_on>
+            <sys_id>2943c3129f333100cf4696fcc67fcf6a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2015-05-05 21:13:02</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>relative_path</element>
+            <list_id display_value="sys_ws_operation" element="NULL" name="sys_ws_operation" parent="sys_ws_definition" relationship="NULL" sys_domain="global" view="Default view">6543c3129f333100cf4696fcc67fcf6a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2015-05-05 21:13:02</sys_created_on>
+            <sys_id>6943c3129f333100cf4696fcc67fcf6a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2015-05-05 21:13:02</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>operation_uri</element>
+            <list_id display_value="sys_ws_operation" element="NULL" name="sys_ws_operation" parent="sys_ws_definition" relationship="NULL" sys_domain="global" view="Default view">6543c3129f333100cf4696fcc67fcf6a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2015-05-05 21:13:02</sys_created_on>
+            <sys_id>a943c3129f333100cf4696fcc67fcf6a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2015-05-05 21:13:02</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>web_service_definition</element>
+            <list_id display_value="sys_ws_operation" element="NULL" name="sys_ws_operation" parent="sys_ws_definition" relationship="NULL" sys_domain="global" view="Default view">6543c3129f333100cf4696fcc67fcf6a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2015-05-05 21:13:02</sys_created_on>
+            <sys_id>e943c3129f333100cf4696fcc67fcf6a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2015-05-05 21:13:02</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>web_service_version</element>
+            <list_id display_value="sys_ws_operation" element="NULL" name="sys_ws_operation" parent="sys_ws_definition" relationship="NULL" sys_domain="global" view="Default view">6543c3129f333100cf4696fcc67fcf6a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2015-05-05 21:13:02</sys_created_on>
+            <sys_id>2d43c3129f333100cf4696fcc67fcf6a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2015-05-05 21:13:02</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>active</element>
+            <list_id display_value="sys_ws_operation" element="NULL" name="sys_ws_operation" parent="sys_ws_definition" relationship="NULL" sys_domain="global" view="Default view">6543c3129f333100cf4696fcc67fcf6a</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2015-05-05 21:13:02</sys_created_on>
+            <sys_id>6d43c3129f333100cf4696fcc67fcf6a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2015-05-05 21:13:02</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>sys_ws_operation</name>
+            <parent>sys_ws_definition</parent>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+            <sys_created_on>2016-10-06 10:43:28</sys_created_on>
+            <sys_customer_update>true</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_id>d1ed6aad0fde62006c3005cce1050e19</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>sys_ws_operation</sys_name>
+            <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+            <sys_update_name>sys_ui_list_sys_ws_operation_sys_ws_definition_null</sys_update_name>
+            <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-06 10:43:28</sys_updated_on>
+            <sys_user display_value="Anton Sychikov">702f4b510f67c6406aa57d4ce1050e7b</sys_user>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

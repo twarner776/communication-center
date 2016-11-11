@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_wec_communicatio.SearchServiceHelper</name>
+        <script><![CDATA[(function () {
+    'use strict';
+
+    angular
+        .module('twc-product')
+        .factory('SearchServiceHelper', SearchServiceHelper);
+
+    SearchServiceHelper.$inject = ['$q', '$filter', '$uibModal', 'CommunicatioFactory', 'NgTableParams'];
+
+    function SearchServiceHelper($q, $filter, $uibModal, CommunicatioFactory, NgTableParams) {
+		return {
+			createSimpleSearch: function(service, field, callback, query){
+				var modalInstance = $uibModal.open({
+					
+					templateUrl: '/x_wec_communicatio_modal-create-simple-search-tpl.do',
+					size: 'lg',
+					controller: function ($scope, $uibModalInstance) {
+						var vm = this;
+
+						vm.table = initTable();
+						vm.tableItemSelect = tableItemSelect;
+						vm.cancel = cancel;
+						vm.field = field;
+						vm.getFilter = getFilter;
+
+						setTimeout(function() { 
+							$('input').attr('autocomplete', 'off'); 
+						}, 1000);
+						
+						function getFilter(){
+							var f = {};
+							f[vm.field] = 'text';
+							return f;
+						}
+
+						function tableItemSelect(item){
+							
+							if(callback){
+								callback({
+									display_value: item[field].value,
+									value: item.sys_id.value 
+								});
+							}
+							$uibModalInstance.close();
+	
+						}
+						
+						function initTable() {
+							return new NgTableParams({
+								count: 10
+							}, {
+								counts: [25, 50, 100, 200],
+								getData: function(params) {
+
+									var filters = params.filter(),
+										filtersArr = [];
+
+									filtersArr.push('ORDERBY' + field);
+
+									if(filters.hasOwnProperty(field) && filters[field] !== ""){
+										filtersArr.push(field + 'LIKE' + filters[field]);
+									}
+									if(query){
+										filtersArr.push(query);
+									}
+									
+									return service({
+										sysparm_limit: params.count(),
+										sysparm_offset: (params.page() - 1) * params.count(),
+										sysparm_query: filtersArr.join('^'),
+										sysparm_display_value: 'all',
+										preloader: false
+									}).$promise.then(function(res) {
+										params.total(res.headers['x-total-count']);
+										return res.data.result;
+									});
+								}
+							});
+
+						}
+						
+						
+						function cancel() {
+							$uibModalInstance.dismiss('cancel');
+						}
+
+						
+					},
+					controllerAs: "vm"
+				});
+					
+			},
+
+		}
+    }
+
+})();]]></script>
+        <script_name>SearchServiceHelper</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-11 08:51:33</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>7ad34c9f0f9662006c3005cce1050ea9</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>x_wec_communicatio.SearchServiceHelper</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_script_7ad34c9f0f9662006c3005cce1050ea9</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-10-11 09:58:18</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

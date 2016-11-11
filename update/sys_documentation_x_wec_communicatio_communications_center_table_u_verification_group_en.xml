@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_documentation element="u_verification_group" label="Verification Group" language="en" table="x_wec_communicatio_communications_center_table">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>u_verification_group</element>
+            <help/>
+            <hint/>
+            <label>Verification Group</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <plural>Verification Groups</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-10-21 18:44:24</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>e0dbe96a0f26aa0034457d4ce1050e3a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Verification Group</sys_name>
+            <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+            <sys_update_name>sys_documentation_x_wec_communicatio_communications_center_table_u_verification_group_en</sys_update_name>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-21 18:44:24</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

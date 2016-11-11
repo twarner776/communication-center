@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_wec_communicatio_notification.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<style>
+	
+		.uib-time button{
+			height: 30px;
+			padding: 5px 10px;
+			font-size: 12px;
+			line-height: 1.5;
+			border-radius: 3px;		
+		}
+		tags-input .tags {
+			height: initial;
+		}
+		tags-input .host{
+			height: initial;
+		}
+	</style>
+	
+	
+	<ol class="breadcrumb">
+		<li><a href="https://service.weather.com">Home</a></li>
+		<li><a href="/x_wec_product_box-app.do#/dashboard">My Apps</a></li>
+		<li><a href="" ui-sref="dashboard">Communications Center</a></li>
+		<li class="active">{{vm.state.current.data.label}}</li>
+	</ol>
+
+	<h3 class="page-header twc-header"><span style="text-transform: uppercase;">{{vm.model.u_notification_type.value}} communication</span><small class="pull-right">{{vm.now | date : 'MMMM d, yyyy'}}</small></h3>
+	
+	<form class="form-horizontal twc-form" name="vm.notificationForm" novalidate="true" autocomplete="off">
+
+		<div class="row" ng-if="vm.model.u_verified_by.value">
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm">
+					<label class="col-sm-4 control-label">Verified by</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{vm.model.u_verified_by.display_value}}</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="form-group form-group-sm">
+					<label class="col-sm-4 control-label">Verified</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{vm.model.u_verified.display_value}}</p>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+		
+		<div class="row">
+			
+			<div class="col-sm-6">
+				
+				
+				<!--u_notification_type-->
+				<div class="form-group form-group-sm">
+					<label class="col-sm-4 control-label">Notification Type</label>
+					<div class="col-sm-8">
+					  <select class="form-control" ng-model="vm.model.u_notification_type.value" 
+							 ng-options="option.value as option.label for option in vm.notificationTypes"
+							 name="u_notification_type" ng-disabled="vm.model.sys_id.value"></select>
+					</div>
+					
+				</div>
+
+				<!--u_status-->
+				<div class="form-group form-group-sm">
+					<label class="col-sm-4 control-label">Status</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_status.value" name="u_status" ng-readonly="true"></input>
+					</div>
+					
+				</div>
+				
+				<!--number-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.number">
+					<label class="col-sm-4 control-label">Number</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.number.value" name="number" ng-readonly="true"></input>
+					</div>
+					
+				</div>
+
+				<!--title-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.title">
+					<label class="col-sm-4 control-label">Title</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_title.value" name="title" ng-readonly="!vm.isEdit"></input>
+					</div>
+					
+				</div>
+
+				<!--u_current_status-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_current_status">
+					<label class="col-sm-4 control-label">Current Status</label>
+					<div class="col-sm-8">
+					  <select class="form-control" ng-model="vm.model.u_current_status.value" 
+							 ng-options="option.value as option.label for option in vm.currentStatus"
+							 name="u_current_status" ng-readonly="!vm.isEdit"></select>
+					</div>
+					
+				</div>
+				
+				<!--u_trust_site_status-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_trust_site_status">
+					<label class="col-sm-4 control-label">Trust Site Status</label>
+					<div class="col-sm-8">
+					  <select class="form-control" ng-model="vm.model.u_trust_site_status.value" 
+							 ng-options="option.value as option.label for option in vm.trustStatus"
+							 name="u_trust_site_status" ng-readonly="!vm.isEdit"></select>
+					</div>
+					
+				</div>				
+				
+				<!--u_servicenow_ticket-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_servicenow_ticket">
+					<label class="col-sm-4 control-label">ServiceNow Ticket</label>
+					<div class="col-sm-8">
+						<div class="input-group input-group-sm">
+						  <input type="text" class="form-control" name="u_servicenow_ticket"  
+								 placeholder="Please typeahead search value"
+								 uib-typeahead="incident as incident.number for incident in vm.searchIncident($viewValue)"
+								 typeahead-on-select="vm.setModel($item, $model, $label, $event, 'u_servicenow_ticket', 'number')"
+								 typeahead-wait-ms="500"
+								 typeahead-editable="false" 
+								 ng-model="vm.model.u_servicenow_ticket.display_value" ng-readonly="!vm.isEdit"/>
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click="vm.searchIncidentFullList();" ng-disabled="!vm.isEdit"><i class="fa fa-search" aria-hidden="true"></i></button>
+							</span>
+							
+						</div>
+						
+					</div>
+				</div>				
+				
+				<!--u_incident_ticket_priority-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_incident_ticket_priority">
+					<label class="col-sm-4 control-label">Ticket Priority:</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_incident_ticket_priority.display_value" name="u_incident_ticket_priority" readonly="true"></input>
+					</div>
+					
+				</div>
+
+				<!--u_incident_owner-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_incident_owner">
+					<label class="col-sm-4 control-label">Incident Owner:</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_incident_owner.display_value" name="u_incident_owner" readonly="true"></input>
+					</div>
+					
+				</div>
+
+				<!--u_record-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_record">
+					<label class="col-sm-4 control-label">Record</label>
+					<div class="col-sm-8">
+						<div class="input-group input-group-sm">
+						  <input type="text" class="form-control" name="u_record"  
+								 placeholder="Please typeahead search value"
+								 uib-typeahead="record as record.number for record in vm.searchRecord($viewValue)"
+								 typeahead-on-select="vm.setModel($item, $model, $label, $event, 'u_record', 'number')"
+								 typeahead-wait-ms="500"
+								 typeahead-editable="false" 
+								 ng-model="vm.model.u_record.display_value" ng-readonly="!vm.isEdit"/>
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click="vm.searchRecordFullList();" ng-disabled="!vm.isEdit"><i class="fa fa-search" aria-hidden="true"></i></button>
+							</span>
+							
+						</div>
+						
+					</div>
+				</div>				
+				
+			
+			</div>
+			
+			<div class="col-sm-6">
+				<!--u_incident_start-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_incident_start">
+					<label class="col-sm-4 control-label">Incident Start</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_incident_start.value" name="u_incident_start" ng-readonly="!vm.isEdit"></input>
+					</div>
+					
+				</div>
+				
+				<!--u_resolution_time-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_resolution_time">
+					<label class="col-sm-4 control-label">Resolution Time</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_resolution_time.value" name="u_resolution_time" ng-readonly="!vm.isEdit"></input>
+					</div>
+					
+				</div>
+
+				<!--u_mttr-->
+				<div class="form-group form-group-sm " ng-if="vm.showFields.u_mttr">
+					<label class="col-sm-4 control-label">MTTR:</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_mttr.value" name="u_mttr" ng-readonly="!vm.isEdit"></input>
+					</div>
+					
+				</div>
+				
+				<!--u_incident_source-->
+				<div class="form-group form-group-sm " ng-if="vm.showFields.u_incident_source">
+					<label class="col-sm-4 control-label">Incident Source:</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_incident_source.value" name="u_incident_source" ng-readonly="!vm.isEdit"></input>
+					</div>
+					
+				</div>
+				
+				<!--u_product-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_product">
+					<label class="col-sm-4 control-label">Configuration Item:</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_product.display_value" name="u_product" readonly="true" ></input>
+					</div>
+					
+				</div>
+
+				<!--u_product independent-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_product_independent">
+					<label class="col-sm-4 control-label">Configuration Item:</label>
+					<div class="col-sm-8">
+						<div class="input-group input-group-sm">
+						  <input type="text" class="form-control" name="u_product"  
+								 placeholder="Please typeahead search value"
+								 uib-typeahead="product as product.name for product in vm.searchProduct($viewValue)"
+								 typeahead-on-select="vm.setModel($item, $model, $label, $event, 'u_product', 'name')"
+								 typeahead-wait-ms="500"
+								 typeahead-editable="false" 
+								 ng-model="vm.model.u_product.display_value" ng-readonly="!vm.isEdit"/>
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click="vm.searchProductFullList();" ng-disabled="!vm.isEdit"><i class="fa fa-search" aria-hidden="true"></i></button>
+							</span>
+							
+						</div>
+						
+					</div>
+				</div>				
+				
+				
+				<!--u_location-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_location">
+					<label class="col-sm-4 control-label">Location:</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" ng-model="vm.model.u_location.value" name="u_location" ng-disabled="!vm.isEdit"></input>
+					</div>
+				</div>
+
+				<!--u_location independent-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_location_independent">
+					<label class="col-sm-4 control-label">Location:</label>
+					<div class="col-sm-8">
+						<div class="input-group input-group-sm">
+						  <input type="text" class="form-control" name="u_location"  
+								 placeholder="Please typeahead search value"
+								 uib-typeahead="location as location.name for location in vm.searchLocation($viewValue)"
+								 typeahead-on-select="vm.setModel($item, $model, $label, $event, 'u_location', 'name')"
+								 typeahead-wait-ms="500"
+								 typeahead-editable="false" 
+								 ng-model="vm.model.u_location.display_value" ng-readonly="!vm.isEdit"/>
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click="vm.searchLocationFullList();" ng-disabled="!vm.isEdit"><i class="fa fa-search" aria-hidden="true"></i></button>
+							</span>
+							
+						</div>
+						
+					</div>
+				</div>				
+				
+				
+				<!--u_bridge_status-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_bridge_status">
+					<label class="col-sm-4 control-label">Bridge:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" ng-model="vm.model.u_bridge_status.display_value" name="u_bridge_status" readonly="true"></input>
+					</div>
+				</div>
+
+				<!--u_slack_channel-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_slack_channel">
+					<label class="col-sm-4 control-label">
+						Channel:
+					</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" ng-model="vm.model.u_slack_channel.value" name="u_slack_channel" ng-readonly="!vm.isEdit"></input>
+					</div>
+				</div>
+				
+				<!--u_maintenance_start_time-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_maintenance_start_time" ng-class="{'has-error': vm.isInvalid(vm.notificationForm['u_maintenance_start_time'])}">
+					<label class="col-sm-4 control-label">Maintenance Start Time:</label>
+					<div class="col-sm-8">
+
+						<div class="row" ng-show="vm.isEdit">
+							  <div class="col-md-6">
+								<p class="input-group input-group-sm">
+								  <input type="text" class="form-control" name="u_maintenance_start_time" uib-datepicker-popup="yyyy-MM-dd" ng-model="vm.model.u_maintenance_start_time.display_value" is-open="vm.u_maintenance_start_time.opened" close-text="Close"/>
+								  <span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="vm.u_maintenance_start_time.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+								  </span>
+								</p>
+							  </div>
+
+							  <div class="col-md-6">
+								<div uib-timepicker="true" ng-model="vm.model.u_maintenance_start_time.display_value" show-meridian="true" show-spinners="false" ng-show="vm.isEdit"></div>
+							</div>
+						</div>						
+						
+
+						<span ng-show="!vm.isEdit">{{vm.model.u_maintenance_start_time.display_value | date : 'yyyy-MM-dd h:mm a'}}</span>
+						
+					</div>
+				</div>
+
+				<!--u_maintenance_projected_end_time-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_maintenance_projected_end_time" ng-class="{'has-error': vm.isInvalid(vm.notificationForm['u_maintenance_projected_end_time'])}">
+					<label class="col-sm-4 control-label">Maintenance Projected End Time:</label>
+					<div class="col-sm-8">
+						
+						<div class="row" ng-show="vm.isEdit">
+							  <div class="col-md-6">
+								<p class="input-group input-group-sm">
+								  <input type="text" class="form-control" name="u_maintenance_projected_end_time" uib-datepicker-popup="yyyy-MM-dd" ng-model="vm.model.u_maintenance_projected_end_time.display_value" is-open="vm.u_maintenance_projected_end_time.opened" close-text="Close" />
+								  <span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="vm.u_maintenance_projected_end_time.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+								  </span>
+								</p>
+							  </div>
+
+							  <div class="col-md-6">
+								<div uib-timepicker="true" ng-model="vm.model.u_maintenance_projected_end_time.display_value" show-meridian="true" show-spinners="false" ng-show="vm.isEdit"></div>
+							</div>
+						</div>						
+						
+						<span ng-show="!vm.isEdit">{{vm.model.u_maintenance_projected_end_time.display_value | date : 'yyyy-MM-dd h:mm a'}}</span>
+					</div>
+				</div>
+				
+				<!--u_actual_maintenance_end_time-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_actual_maintenance_end_time" ng-class="{'has-error': vm.isInvalid(vm.notificationForm['u_actual_maintenance_end_time'])}">
+					<label class="col-sm-4 control-label">Actual Maintenance End Time:</label>
+					<div class="col-sm-8">
+						
+						<div class="row" ng-show="vm.isEdit">
+							  <div class="col-md-6">
+								<p class="input-group input-group-sm">
+								  <input type="text" class="form-control" name="u_actual_maintenance_end_time" uib-datepicker-popup="yyyy-MM-dd" ng-model="vm.model.u_actual_maintenance_end_time.display_value" is-open="vm.u_actual_maintenance_end_time.opened" close-text="Close" />
+								  <span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="vm.u_actual_maintenance_end_time.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+								  </span>
+								</p>
+							  </div>
+
+							  <div class="col-md-6">
+								<div uib-timepicker="true" ng-model="vm.model.u_actual_maintenance_end_time.display_value" show-meridian="true" show-spinners="false" ng-show="vm.isEdit"></div>
+							</div>
+						</div>						
+						
+						<span ng-show="!vm.isEdit">{{vm.model.u_actual_maintenance_end_time.display_value | date : 'yyyy-MM-dd h:mm a'}}</span>
+					</div>
+				</div>
+				
+				<!--u_rfc-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_rfc">
+					<label class="col-sm-4 control-label">RFC #</label>
+					<div class="col-sm-8">
+						<div class="input-group input-group-sm">
+						  <input type="text" class="form-control" name="u_rfc" 
+								 placeholder="Please typeahead search value"
+								 uib-typeahead="cr as cr.number for cr in vm.searchChangeRequest($viewValue)"
+								 typeahead-on-select="vm.setModel($item, $model, $label, $event, 'u_rfc', 'number')"
+								 typeahead-wait-ms="500"
+								 typeahead-editable="false" 
+								 ng-model="vm.model.u_rfc.display_value" ng-readonly="!vm.isEdit"/>
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click="vm.searchChangeRequestFullList();" ng-disabled="!vm.isEdit"><i class="fa fa-search" aria-hidden="true"></i></button>
+							</span>
+							
+						</div>
+						
+					</div>
+				</div>				
+				
+				<!--u_maintenance_poc-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_maintenance_poc">
+					<label class="col-sm-4 control-label">Maintenance POC</label>
+					<div class="col-sm-8">
+						<div class="input-group input-group-sm">
+						  <input type="text" class="form-control"
+								 placeholder="Please typeahead search value"
+								 uib-typeahead="user as user.name for user in vm.searchUser($viewValue)"
+								 typeahead-on-select="vm.setModel($item, $model, $label, $event, 'u_maintenance_poc', 'name')"
+								 typeahead-wait-ms="500"
+								 typeahead-editable="false"
+								 ng-model="vm.model.u_maintenance_poc.display_value" ng-readonly="!vm.isEdit"/>
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click="vm.searchUserFullList('u_maintenance_poc');" ng-disabled="!vm.isEdit"><i class="fa fa-search" aria-hidden="true"></i></button>
+							</span>
+							
+						</div>
+						
+					</div>
+				</div>
+				
+				<!--u_change_display-->
+				<div class="form-group form-group-sm" ng-if="vm.showFields.u_change_display">
+					<div class="col-sm-offset-4 col-sm-8">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" ng-model="vm.changeFreezeDependent" ng-disabled="!vm.isEdit" /> Change Freeze Lifted/Extended
+							</label>
+						</div>
+					</div>
+				</div>
+				
+				<!--u_overriding_comm-->
+
+				<div class="form-group form-group-sm required" ng-if="vm.changeFreezeDependent" ng-class="{'has-error': vm.isInvalid(vm.notificationForm['u_overriding_comm'])}">
+					<label class="col-sm-4 control-label">Override Communication</label>
+					<div class="col-sm-8">
+
+						<select class="form-control" ng-model="vm.model.u_overriding_comm.value" 
+							 ng-options="comm.sys_id as comm.number + ' ' + comm.u_title for comm in vm.changeFreeze"
+							 name="u_overriding_comm" ng-required="true" ng-disabled="!vm.isEdit"></select>
+						
+						
+					</div>
+				</div>
+				
+			</div>	
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-12">
+				
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label">Tags:</label>
+					<div class="col-sm-10">
+						
+						<tags-input ng-model="vm.tags" display-property="name" ng-disabled="!vm.isEdit" on-tag-added="vm.onTagAdded($tag)" class="ti-input-sm">
+						  <auto-complete source="vm.searchLabel($query)" min-length="2"></auto-complete>
+						</tags-input>
+
+					</div>
+				</div>
+				
+		
+			</div>	
+
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				
+				<uib-tabset active="vm.tabActive">
+					<uib-tab index="0" heading="Email" classes="col-sm-offset-2">
+						 
+						<!--u_description-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_description">
+							<label class="col-sm-2 control-label">Description:</label>
+							<div class="col-sm-10">
+							  <textarea style="min-height:66px;" class="form-control msd-elastic" ng-model="vm.model.u_description.value" name="u_description" ng-readonly="!vm.isEdit" ></textarea>
+							</div>
+						</div>
+
+						<!--u_impact-->
+						<div class="form-group form-group-sm " ng-if="vm.showFields.u_impact">
+							<label class="col-sm-2 control-label">Impact:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_impact.value" name="u_impact" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+
+						<!--u_latest_info-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_latest_info">
+							<label class="col-sm-2 control-label">Latest Info:</label>
+							<div class="col-sm-10">
+							  <textarea style="min-height:66px;" class="form-control msd-elastic" ng-model="vm.model.u_latest_info.value" name="u_latest_info" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+
+						<!--u_next_step-->
+						<div class="form-group form-group-sm "  ng-if="vm.showFields.u_next_step">
+							<label class="col-sm-2 control-label">Next Step:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_next_step.value" name="u_next_step" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+
+						<!--u_incident_history-->
+						<div class="form-group form-group-sm " ng-if="vm.showFields.u_incident_history">
+							<label class="col-sm-2 control-label">Incident History:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_incident_history.value" name="u_incident_history" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+
+						<!--u_maintenance_history-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_maintenance_history">
+							<label class="col-sm-2 control-label">Maintenance History:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_maintenance_history.value" name="u_maintenance_history" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+
+						<!--u_text_field_1-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_text_field_1">
+							<label class="col-sm-2 control-label">Text Field 1:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_text_field_1.value" name="u_text_field_1" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+
+						<!--u_text_field_2-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_text_field_2">
+							<label class="col-sm-2 control-label">Text Field 2:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_text_field_2.value" name="u_text_field_2" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+
+						<!--u_text_field_3-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_text_field_3">
+							<label class="col-sm-2 control-label">Text Field 3:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_text_field_3.value" name="u_text_field_3" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+
+						<!--u_text_field_4-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_text_field_4">
+							<label class="col-sm-2 control-label">Text Field 4:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_text_field_4.value" name="u_text_field_4" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+						
+						<!--u_text_field_5-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_text_field_5">
+							<label class="col-sm-2 control-label">Text Field 5:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_text_field_5.value" name="u_text_field_5" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+
+						<!--u_text_field_6-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_text_field_6">
+							<label class="col-sm-2 control-label">Text Field 6:</label>
+							<div class="col-sm-10">
+							  <textarea class="form-control msd-elastic" ng-model="vm.model.u_text_field_6.value" name="u_text_field_6" ng-readonly="!vm.isEdit"></textarea>
+							</div>
+						</div>
+						
+					</uib-tab>
+					<uib-tab index="1" heading="SMS" ng-if="vm.model.u_notification_type.value !== 'Trust Site'">
+						<!--u_sms_title-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_sms_title">
+							<label class="col-sm-2 control-label">
+								Title:
+							</label>
+							<div class="col-sm-10">
+								<span class="label label-info">{{vm.model.u_sms_title.value?vm.model.u_sms_title.value.length:0}} / 75</span>
+								<input type="text" class="form-control" ng-model="vm.model.u_sms_title.value" name="u_sms_title" ng-readonly="!vm.isEdit" maxlength="75"></input>
+							</div>
+						</div>
+
+						<!--u_sms_priority-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_sms_priority">
+							<label class="col-sm-2 control-label">
+								Priority:
+							</label>
+							<div class="col-sm-10">
+								<span class="label label-info">{{vm.model.u_sms_priority.value?vm.model.u_sms_priority.value.length:0}} / 2</span>
+								<input type="text" class="form-control" ng-model="vm.model.u_sms_priority.value" name="u_sms_priority" ng-readonly="!vm.isEdit" maxlength="2"></input>
+							</div>
+						</div>
+
+						<!--u_sms_description-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_sms_description">
+							<label class="col-sm-2 control-label">
+								Description:
+							</label>
+							<div class="col-sm-10">
+								<span class="label label-info">{{vm.model.u_sms_description.value?vm.model.u_sms_description.value.length:0}} / 180</span>
+								<input type="text" class="form-control" ng-model="vm.model.u_sms_description.value" name="u_sms_description" ng-readonly="!vm.isEdit" maxlength="180"></input>
+							</div>
+						</div>
+
+						<!--u_sms_incident_ticket-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_sms_incident_ticket">
+							<label class="col-sm-2 control-label">
+								Incident Ticket:
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" ng-model="vm.model.u_sms_incident_ticket.value" name="u_sms_incident_ticket" ng-readonly="true"></input>
+							</div>
+						</div>
+						
+					</uib-tab>	
+					
+					<uib-tab index="2" heading="Slack" disable="false" ng-if="vm.model.u_notification_type.value !== 'Trust Site'">
+						
+						<!--u_public_slack_channel-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_public_slack_channel">
+							<label class="col-sm-2 control-label">
+								Public Slack Channel:
+							</label>
+							<div class="col-sm-10">
+								<span class="label label-info">{{vm.model.u_public_slack_channel.value?vm.model.u_public_slack_channel.value.length:0}} / 100</span>
+								<input type="text" class="form-control" ng-model="vm.model.u_public_slack_channel.value" name="u_public_slack_channel" ng-readonly="!vm.isEdit" maxlength="100"></input>
+							</div>
+						</div>
+
+						
+						<!--u_slack_title-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_slack_title">
+							<label class="col-sm-2 control-label">
+								Title:
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" ng-model="vm.model.u_slack_title.value" name="u_slack_title" ng-readonly="!vm.isEdit"></input>
+							</div>
+						</div>
+						
+						<!--u_slack_priority-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_slack_priority">
+							<label class="col-sm-2 control-label">
+								Priority:
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" ng-model="vm.model.u_slack_priority.value" name="u_slack_priority" ng-readonly="!vm.isEdit"></input>
+							</div>
+						</div>
+						
+						<!--u_slack_description -->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_slack_description ">
+							<label class="col-sm-2 control-label">
+								Description :
+							</label>
+							<div class="col-sm-10">
+								<span class="label label-info">{{vm.model.u_slack_description.value?vm.model.u_slack_description.value.length:0}} / 400</span>
+								<textarea class="form-control msd-elastic" ng-model="vm.model.u_slack_description.value" name="u_slack_description " ng-readonly="!vm.isEdit" maxlength="400"></textarea>
+							</div>
+						</div>
+						
+						<!--u_slack_incident_ticket-->
+						<div class="form-group form-group-sm" ng-if="vm.showFields.u_slack_incident_ticket">
+							<label class="col-sm-2 control-label">
+								Incident Ticket:
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" ng-model="vm.model.u_slack_incident_ticket.value" name="u_slack_incident_ticket" ng-readonly="true"></input>
+							</div>
+						</div>
+						
+					</uib-tab>	
+					
+				</uib-tabset>
+				
+			</div>
+		</div>
+		
+		<h3 class="page-header twc-header" ng-if="vm.model.u_notification_type.value !== 'Trust Site'">Notification Recipients</h3>
+
+		<div class="row" ng-if="vm.model.u_notification_type.value !== 'Trust Site'">
+			<div class="col-sm-6">
+
+				<div class="panel panel-default">
+				  <div class="panel-body" style="background: #f5f5f5;">
+					
+					  
+						<!--u_send_to_users-->
+						<div class="form-group form-group-sm">
+							<label class="col-sm-4 control-label">Send to Users:</label>
+							<div class="col-sm-8">
+								<div class="row">
+
+									<div class="col-sm-5">
+
+										<div class="input-group input-group-sm">
+										  <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
+										  <input type="text" class="form-control" ng-model="vm.userSearch" ng-model-options="{debounce: 500}" ng-change='vm.searchUser2Select(vm.userSearch)' ng-init="vm.searchUser2Select('a')" ng-disabled="!vm.isEdit"/>
+										</div>
+
+									</div>
+									<label class="col-sm-5 col-sm-offset-2" style="font-size: 12px;">Users List</label>
+								</div>
+
+								<div class="row">
+
+									<div class="col-sm-5">
+
+										<select class="form-control input-sm" 
+												multiple="multiple" 
+												ng-options="user as user.display_value for user in vm.user2Select"
+												ng-model="vm.selectLeftUsersCollection"
+												ng-disabled="!vm.isEdit"
+												size="7"></select>
+
+									</div>
+									<div class="col-sm-2" style="text-align: center; margin-top: 50px;">
+										<div class="btn-group-vertical">
+										  <button type="button" class="btn btn-primary" ng-click="vm.addUser();" ng-disabled="!vm.isEdit"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+										  <button type="button" class="btn btn-primary" ng-click="vm.removeUser();" ng-disabled="!vm.isEdit"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+										</div>					
+									</div>
+									<div class="col-sm-5">
+											<select class="form-control input-sm" 
+													multiple="multiple" 
+													ng-model="vm.selectRightUsersCollection"
+													ng-options="user as user.display_value for user in vm.userCollection"
+													ng-disabled="!vm.isEdit"
+													size="7"></select>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+
+						<!--u_send_to_groups-->
+						<div class="form-group form-group-sm">
+							<label class="col-sm-4 control-label">Send to Groups:</label>
+								<div class="col-sm-8">
+									<div class="row">
+
+										<div class="col-sm-5">
+
+											<div class="input-group input-group-sm">
+											  <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
+											  <input type="text" class="form-control" ng-model="vm.groupSearch" ng-model-options="{debounce: 500}" ng-change='vm.searchGroup2Select(vm.groupSearch)' ng-init="vm.searchGroup2Select('a')" ng-disabled="!vm.isEdit"/>
+											</div>
+
+										</div>
+										<label class="col-sm-5 col-sm-offset-2" style="font-size: 12px;">Groups List</label>
+									</div>
+
+									<div class="row">
+
+										<div class="col-sm-5">
+
+											<select class="form-control input-sm" 
+													multiple="multiple" 
+													ng-options="group as group.display_value for group in vm.group2Select"
+													ng-model="vm.selectLeftGroupsCollection"
+													ng-disabled="!vm.isEdit"
+													size="7"></select>
+
+										</div>
+										<div class="col-sm-2" style="text-align: center; margin-top: 50px;">
+											<div class="btn-group-vertical">
+											  <button type="button" class="btn btn-primary" ng-click="vm.addGroup();" ng-disabled="!vm.isEdit"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+											  <button type="button" class="btn btn-primary" ng-click="vm.removeGroup();" ng-disabled="!vm.isEdit"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+											</div>					
+										</div>
+										<div class="col-sm-5">
+												<select class="form-control input-sm" 
+														multiple="multiple" 
+														ng-model="vm.selectRightGroupsCollection"
+														ng-options="group as group.display_value for group in vm.groupCollection"
+														ng-disabled="!vm.isEdit"
+														size="7"></select>
+										</div>
+
+									</div>						
+							</div>
+						</div>
+
+						<!--u_external_email-->
+						<div class="form-group form-group-sm" ng-class="{'has-error': vm.isInvalid(vm.notificationForm['u_external_email'])}">
+							<label class="col-sm-4 control-label">Send to Email Addresses</label>
+							<div class="col-sm-8">
+							  <input type="text" class="form-control" ng-model="vm.model.u_external_email.value" name="u_external_email" ng-readonly="!vm.isEdit"></input>
+							</div>
+
+						</div>
+					  
+					  
+				  </div>
+				</div>
+				
+				
+				
+				
+			</div>
+			
+			<div class="col-sm-6">
+				
+				<!--send now-->
+				<div class="form-group form-group-sm" ng-show="vm.isEdit">
+					<label class="col-sm-4 control-label" style="color: red;">Send Now:</label>
+					<div class="col-sm-8">
+						<input type="checkbox" ng-model="vm.sendNow" ng-readonly="!vm.isEdit"/>
+					</div>
+				</div>
+				
+				<!--u_schedule_time-->
+				<div class="form-group form-group-sm" ng-show="!vm.sendNow">
+					<label class="col-sm-4 control-label">Schedule Notification for Future Date/Time:</label>
+					<div class="col-sm-8">
+						<div uib-datepicker="true" ng-model="vm.model.u_scheduled_time.display_value" ng-show="vm.isEdit"></div>
+						<span ng-show="!vm.isEdit">{{vm.model.u_scheduled_time.display_value}}</span>
+					</div>
+				</div>
+				<div class="form-group form-group-sm" ng-show="!vm.sendNow">
+					<div class="col-sm-8 col-sm-offset-4" ng-show="vm.isEdit">
+						<div uib-timepicker="true" ng-model="vm.model.u_scheduled_time.display_value" show-meridian="true"></div>
+						<span style="position: absolute; bottom: 33px; left: 180px;">Eastern Time</span>
+					</div>
+				</div>
+				
+				<!--u_reminder-->
+				<div class="form-group form-group-sm">
+					<label class="col-sm-4 control-label">Schedule Notification Reminder:</label>
+					<div class="col-sm-8">
+						<input type="checkbox"  ng-true-value="'true'" ng-false-value="'false'" ng-model="vm.model.u_reminder.value" ng-disabled="!vm.isEdit"/> 
+					</div>
+				</div>
+				
+				<!--u_reminder_time-->
+				<div class="form-group form-group-sm">
+					<div class="col-sm-8 col-sm-offset-4">
+						
+					  <select class="form-control" ng-model="vm.model.u_reminder_time.value" 
+							 ng-options="option.value as option.label for option in vm.reminderTime"
+							 name="u_reminder_time" ng-disabled="vm.model.u_reminder.value !== 'true'" ng-readonly="!vm.isEdit"></select>
+						
+						
+					</div>
+				</div>
+				
+				
+			</div>
+			
+		</div>	
+		<hr />
+		<div calss="row">
+			<div class="col-sm-12">
+
+			  <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+				  <button type="submit" 
+						  ng-disabled="vm.notificationForm.$invalid"
+						  ng-click="vm.preview()"
+						  ng-class="{'btn-primary': vm.notificationForm.$dirty, 'btn-default active': vm.notificationForm.$pristine}"
+						  class="btn btn-sm"><span ng-if="!vm.model.sys_id">Preview and Send</span><span ng-if="vm.model.sys_id" ng-show="vm.isOwner">Preview and Send</span><span ng-if="vm.model.sys_id" ng-show="!vm.isOwner">Verify and Send</span></button>
+
+
+					<button type="button" 
+						  class="btn btn-default btn-sm pull-right" ng-click="vm.state.go('dashboard')">Cancel</button>
+				</div>
+			  </div>				
+			</div>
+		
+		</div>
+		
+		
+	</form>
+	
+	
+
+</j:jelly>]]></html>
+        <name>notification</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-06 12:57:52</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>0e9c0f6d0f12a2006c3005cce1050e23</sys_id>
+        <sys_mod_count>249</sys_mod_count>
+        <sys_name>notification</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_page_0e9c0f6d0f12a2006c3005cce1050e23</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-11 09:37:57</sys_updated_on>
+    </sys_ui_page>
+</record_update>

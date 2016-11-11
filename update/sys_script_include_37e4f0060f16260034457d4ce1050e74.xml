@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_wec_communicatio.TwcCoreCommCtr</api_name>
+        <client_callable>false</client_callable>
+        <description>Scripts to manage communication center request processing.&#13;
+- schedule() - start timer to wait until the scheduled time to send notification&#13;
+- cancel() - cancel scheduled notification(s)&#13;
+- send()  - send notification immediately</description>
+        <name>TwcCoreCommCtr</name>
+        <script><![CDATA[// TWC Core Communication Center (CC)
+// PURPOSE: Manage the scheduling, rescheduling and sending of CC Notifications
+//
+var TwcCoreCommCtr = Class.create();
+
+var twcNotify;  // notify object
+var wfName;
+var MaxSMS;
+
+TwcCoreCommCtr.prototype = {
+
+    initialize : function() {
+        gs.debug("TwcCoreCommCtr.initialize()");
+        MaxSMS = gs.getProperty('twc.notify.MaxSMS');
+        wfName = gs.getProperty('x_wec_communicatio.twc.cc.workflow');
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Start the workflow that will schedule the sending of the
+    // given Communication Center (CC) record.
+    // If the CC record already has a workflow context in state "Executing"
+    // cancel that one and replace it.
+    ////////////////////////////////////////////////////////////////////////////
+    schedule : function(cc)
+    {
+      gs.debug("TwcCoreCommCtr.schedule("+cc.number+") - BEGIN");
+      try {
+        // Clear any previous executing workflow context for this CC
+        //
+        this.cancel(cc);
+
+        // If the scheduled time is blank, do nothing.
+        //
+        if ( cc.u_scheduled_time.nil() || cc.u_scheduled_time == "" )
+        {
+            gs.debug("TwcCoreCommCtr.schedule() - no schedule time, exit");
+            return;
+        }
+
+        // Find the workflow
+        var incident_number = "";
+        gs.debug("TwcCoreCommCtr.schedule() - Find the workflow");
+        var wfGr = new GlideRecord("wf_workflow");
+        wfGr.addQuery("table", cc.sys_class_name);
+        wfGr.addQuery("name", wfName);
+        wfGr.query();
+        if (wfGr.next() == false)
+        {
+            // Log the error and auto-create an incident
+            var emsg = "Workflow '"+wfName+"' not found for table '"+cc.sys_class_name+"'";
+            incident_number = (new global.TwcCoreError()).openCoreApiIncident( emsg , emsg + "\n" + "TwcCoreCommCtr.schedule()");
+            gs.error(emsg + "\nResulting Incident: " + incident_number);
+            gs.addErrorMessage("Communication center notification failed.\nResulting Incident: " + incident_number);
+            return;
+        }
+
+        // Start the workflow
+        gs.debug("TwcCoreCommCtr.schedule() - Start the workflow "+wfGr.name);
+        (new global.Workflow()).startFlow(wfGr.sys_id, cc, cc.operation(), {});
+
+      } catch (ex) {
+
+          // Log the error and auto-create an incident
+          var summary = "Internal Exception in script-include TwcCoreCommCtr.schedule()";
+          var detail = 'Exception: \n' + ex
+                  + '\nSourceName: ' + ex.sourceName
+                  + '\nLineNumber: ' + ex.lineNumber
+                  + '\nName: ' + ex.name
+                  + '\nMessage: ' + ex.message
+                  + '\nStackTrace: ' + ex.stack
+          ;
+          incident_number = (new global.TwcCoreError()).openCoreApiIncident( summary, detail );
+          gs.error(summary + "\n" + detail + "\nResulting Incident: " + incident_number);
+          gs.addErrorMessage("Communication center notification failed.\nResulting Incident: " + incident_number);
+          return;
+      }
+      gs.debug("TwcCoreCommCtr.schedule("+cc.number+") - END");
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Cancel any CC record with a workflow context in state "Executing"
+    ////////////////////////////////////////////////////////////////////////////
+    cancel : function(cc)
+    {
+        gs.debug("TwcCoreCommCtr.cancel("+cc.number+") - BEGIN");
+        var ctxtGr = new GlideRecord("wf_context");
+        //ctxtGr.addQuery("id.number", cc.number);
+        ctxtGr.addQuery("workflow.name", wfName);
+        ctxtGr.addQuery("state", "Executing");
+        ctxtGr.query();
+        while (ctxtGr.next())
+        {
+            if (ctxtGr.id.number != cc.number)
+            {   // For some reason this doesn't work in the addQuery, so we do it here.
+                gs.debug("TwcCoreCommCtr.cancel() - skip item for "+ctxtGr.id.number);
+                continue;
+            }
+            gs.debug("TwcCoreCommCtr.cancel() - cancel previous workflow context"
+                + "\nctxtGr.sys_id: "+ctxtGr.sys_id
+                + "\nctxtGr.id.number: "+ctxtGr.id.number
+                + "\nctxtGr.state: "+ctxtGr.state
+                + "\nctxtGr.workflow.name: "+ctxtGr.workflow.name
+            );
+            (new global.Workflow()).cancelContext(ctxtGr);
+            gs.addInfoMessage("Scheduled notification "+ctxtGr.id.number+" is cancelled");
+        }
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Send the notification for the given Communication Center record.
+    // Update the time-sent field with the current time.
+    ////////////////////////////////////////////////////////////////////////////
+    send : function(cc)
+    {
+        gs.debug("TwcCoreCommCtr.send("+cc.number+") - BEGIN");
+
+        // Send email
+        //
+        gs.info("TwcCoreCommCtr.send("+cc.number+") SEND email");
+        gs.eventQueue("x_wec_communicatio.cc.notification", cc, "", "");
+
+        // Send SMS
+        //
+        if (twcNotify == undefined) twcNotify = new global.TwcCoreNotify();
+
+        var nums = this.getRecipientNumbers(cc);
+        var msg = this.prepareSmsText(cc);
+
+        if (msg.length > 0)
+        {
+            gs.info("TwcCoreCommCtr.send("+cc.number+") SEND SMS");
+            twcNotify.sendSmsToNumbers(msg, nums);
+        }
+
+        // Send Slack
+        //
+        var smsg = "";
+        if ( gs.nil(cc.u_slack_title) == false && cc.u_slack_title != "" )
+        {
+            smsg = smsg + cc.u_slack_title;
+        }
+        if ( gs.nil(cc.u_slack_priority) == false && cc.u_slack_priority != "" )
+        {
+            if (smsg != "") smsg = smsg + "\n";
+            smsg = smsg + cc.u_slack_priority;
+        }
+        if ( gs.nil(cc.u_slack_description) == false && cc.u_slack_description != "" )
+        {
+            if (smsg != "") smsg = smsg + "\n";
+            smsg = smsg + cc.u_slack_description;
+        }
+        if ( gs.nil(cc.u_slack_incident_ticket) == false && cc.u_slack_incident_ticket != "" )
+        {
+            if (smsg != "") smsg = smsg + "\n";
+            smsg = smsg + cc.u_slack_incident_ticket;
+        }
+     
+        if (smsg != "")
+        {
+            gs.info("TwcCoreCommCtr.send("+cc.number+") SEND SLACK");
+            var rest_message = gs.getProperty("x_wec_communicatio.twc.cc.rest.slack");
+            var slack = new global.TwcCoreSlack(rest_message);
+            if ( gs.nil(cc.u_public_slack_channel) == false && cc.u_public_slack_channel != "" )
+                slack.addChannel(cc.u_public_slack_channel);
+            if ( gs.nil(cc.u_slack_channel) == false && cc.u_slack_channel != "" )
+                slack.addChannel(cc.u_slack_channel);
+            slack.sendMessage(smsg);
+        }
+
+        // Update the status
+        //
+        ccGr = new GlideRecord(cc.sys_class_name);
+        ccGr.addQuery("number", cc.number);
+        ccGr.query();
+        while (ccGr.next())
+        {
+            ccGr.u_status = "Sent";
+            ccGr.u_sent = new GlideDateTime();
+            ccGr.update();
+            gs.debug("TwcCoreCommCtr.send("+cc.number+") status="+ccGr.u_scheduled_time);
+        }
+
+        gs.debug("TwcCoreCommCtr.send("+cc.number+") - END");
+        return;
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Put the required info from the CC record into a text message.
+    ////////////////////////////////////////////////////////////////////////////
+    prepareSmsText: function(cc)
+    {
+        var text="";
+        var instance = gs.getProperty('glide.servlet.uri');
+
+        if ( gs.nil(cc.u_sms_title) == false && cc.u_sms_title != "" )
+            text = cc.u_sms_title;
+
+        if ( gs.nil(cc.u_sms_priority) == false && cc.u_sms_priority != "" )
+            text = text + "\n" + cc.u_sms_priority;
+
+        if ( gs.nil(cc.u_sms_description) == false && cc.u_sms_description != "" )
+            text = text + "\n" + cc.u_sms_description;
+
+        if ( gs.nil(cc.u_sms_incident_ticket) == false && cc.u_sms_incident_ticket != "" )
+        {
+            text = text + "\n" + cc.u_sms_incident_ticket;
+	    var url = (new global.TwcCoreUtil()).shortenUrl( instance + "ess_portal/main_content.do?sysparm_content_url=incident.do?sys_id=" + cc.u_servicenow_ticket.sys_id ) ;
+            if (url.length <= 21)
+                text = text + "\n" + url;
+        }
+
+        if ( gs.nil(cc.u_maintenance_start_time) == false && cc.u_maintenance_start_time != "" )
+            text = text + "\nStart " + cc.u_maintenance_start_time;
+
+        if ( gs.nil(cc.u_maintenance_projected_end_time) == false && cc.u_maintenance_projected_end_time != "" )
+            text = text + "\nProj end " + cc.u_maintenance_projected_end_time;
+
+        if ( gs.nil(cc.u_actual_maintenance_end_time) == false && cc.u_actual_maintenance_end_time != "" )
+            text = text + "\nActual end " + cc.u_actual_maintenance_end_time;
+
+        gs.debug("text:\n"+text);
+        gs.debug("text.length="+text.length);
+        if (text.length > MaxSMS)
+        {
+            gs.warn("Truncating SMS that is too long <"+text+">");
+            text = text.substr(0,MaxSMS);
+        }
+        return text;
+    },
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Return a list of the recipients' mobile numbers
+    // based on users & groups on CC record.
+    ////////////////////////////////////////////////////////////////////////////
+    getRecipientNumbers : function(cc)
+    {
+        var recSysIds = [], recNums = [],  users = [], groups = [], ii;
+
+        if (twcNotify == undefined) twcNotify = new global.TwcCoreNotify();
+
+        if ( gs.nil(cc.u_send_to_users) == false && cc.u_send_to_users != "" )
+             users = cc.u_send_to_users.split(',');	// List of user sys_ids
+
+        if ( gs.nil(cc.u_send_to_groups) == false && cc.u_send_to_groups != "" )
+             groups = cc.u_send_to_groups.split(',');	// List of group sys_ids
+
+        // Put the listed user sys_ids in the
+        //
+        for (ii=0; ii<users.length; ii++)
+        {
+            recSysIds.push(users[ii]+"");
+        }
+
+        // Get the users that are members of the listed groups
+        //
+        var grmemberGr = new GlideRecord("sys_user_grmember");
+        for (ii=0; ii<groups.length; ii++)
+        {
+            grmemberGr.initialize();
+            grmemberGr.addQuery("group", groups[ii]);
+            grmemberGr.query();
+            while (grmemberGr.next())
+            {
+                recSysIds.push(grmemberGr.user.sys_id+"");
+            }
+        }
+
+        // Clean out duplicates
+        recSysIds = (new global.ArrayUtil()).unique(recSysIds);
+
+        // Get the numbers
+        var userGr = new GlideRecord("sys_user");
+        for (ii=0; ii<recSysIds.length; ii++)
+        {
+            userGr.get(recSysIds[ii]);
+
+            // Guard against SMS being sent from non-production instance
+            // to people not involved in Dev/Test or who are inactive.
+            //
+            if (twcNotify.userActiveTwc(userGr) == false
+             || twcNotify.allowSMS(userGr.email) == false)
+            {
+                gs.info("TwcCoreCommCtr.getRecipientNumbers skip SMS for user "+userGr.email);
+                continue;
+            }
+            recNums.push(userGr.mobile_phone+"");
+        }
+        return recNums;
+    },
+
+    type : 'TwcCoreCommCtr'
+
+};
+
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+        <sys_created_on>2016-10-07 15:13:19</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>37e4f0060f16260034457d4ce1050e74</sys_id>
+        <sys_mod_count>129</sys_mod_count>
+        <sys_name>TwcCoreCommCtr</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_script_include_37e4f0060f16260034457d4ce1050e74</sys_update_name>
+        <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-08 16:17:30</sys_updated_on>
+    </sys_script_include>
+</record_update>

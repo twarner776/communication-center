@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_db_object">
+    <sys_db_object action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <actions_access>false</actions_access>
+        <alter_access>false</alter_access>
+        <client_scripts_access>false</client_scripts_access>
+        <configuration_access>false</configuration_access>
+        <create_access>false</create_access>
+        <create_access_controls>true</create_access_controls>
+        <delete_access>false</delete_access>
+        <extension_model/>
+        <is_extendable>true</is_extendable>
+        <label>Communications Center Table</label>
+        <live_feed_enabled>false</live_feed_enabled>
+        <name>x_wec_communicatio_communications_center_table</name>
+        <number_ref display_value="COM">a4f504ae0f06e64034457d4ce1050e4f</number_ref>
+        <provider_class/>
+        <read_access>true</read_access>
+        <super_class/>
+        <sys_class_name>sys_db_object</sys_class_name>
+        <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+        <sys_created_on>2016-09-26 14:47:40</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>23d54c6e0f06e64034457d4ce1050e7e</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Communications Center Table</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_db_object_23d54c6e0f06e64034457d4ce1050e7e</sys_update_name>
+        <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+        <sys_updated_on>2016-10-19 02:08:39</sys_updated_on>
+        <update_access>false</update_access>
+        <user_role display_value="x_wec_communicatio.user" name="x_wec_communicatio.user">bfd5c0ae0f06e64034457d4ce1050edb</user_role>
+        <ws_access>true</ws_access>
+    </sys_db_object>
+</record_update>

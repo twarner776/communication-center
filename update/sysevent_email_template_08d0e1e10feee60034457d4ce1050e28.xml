@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sysevent_email_template">
+    <sysevent_email_template action="INSERT_OR_UPDATE">
+        <collection>x_wec_communicatio_communications_center_table</collection>
+        <message/>
+        <message_html><![CDATA[<p style="font-size: 11px;">&nbsp;<strong><span style="font-size: 24px; color: #000000;">${u_title}</span></strong>&nbsp;<br /><br /></p>
+<p class="p1" style="font-size: 12.8px;"><font face="arial,helvetica,sans-serif">${u_text_field_1}</font></p>
+<p class="p1" style="font-size: 12.8px;"><font face="arial,helvetica,sans-serif">${u_text_field_2}</font></p>
+<p class="p1" style="font-size: 12.8px;"><font face="arial,helvetica,sans-serif">${u_text_field_3}</font></p>
+<p class="p1" style="font-size: 12.8px;"><font face="arial,helvetica,sans-serif">${u_text_field_4}</font></p>
+<p class="p1" style="font-size: 12.8px;"><font face="arial,helvetica,sans-serif">${u_text_field_5}</font></p>
+<p class="p1" style="font-size: 12.8px;"><font face="arial,helvetica,sans-serif">${u_text_field_6}</font></p>
+<p class="p1" style="font-size: 12.8px;">&nbsp;</p>]]></message_html>
+        <message_list/>
+        <message_text/>
+        <name>TWC Core - CC - General</name>
+        <sms_alternate/>
+        <subject>${u_title}</subject>
+        <sys_class_name>sysevent_email_template</sys_class_name>
+        <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+        <sys_created_on>2016-10-18 15:22:22</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>08d0e1e10feee60034457d4ce1050e28</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>TWC Core - CC - General</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sysevent_email_template_08d0e1e10feee60034457d4ce1050e28</sys_update_name>
+        <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-01 18:13:53</sys_updated_on>
+        <sys_version>2</sys_version>
+    </sysevent_email_template>
+</record_update>

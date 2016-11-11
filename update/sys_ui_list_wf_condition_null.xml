@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="wf_condition" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>name</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>3bf310160f2a6a0034457d4ce1050ee0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>activity</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>bbf310160f2a6a0034457d4ce1050ee0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>condition</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>3ff310160f2a6a0034457d4ce1050ee0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>condition_default</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>bff310160f2a6a0034457d4ce1050ee0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>condition_type</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>33f310160f2a6a0034457d4ce1050ee1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>else_flag</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>b3f310160f2a6a0034457d4ce1050ee1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>error</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>37f310160f2a6a0034457d4ce1050ee1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>event</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>7</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>b7f310160f2a6a0034457d4ce1050ee1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>event_name</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>8</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>3bf310160f2a6a0034457d4ce1050ee1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>is_positive</element>
+            <list_id display_value="wf_condition" element="NULL" name="wf_condition" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">37f310160f2a6a0034457d4ce1050ee0</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>9</position>
+            <sum>false</sum>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:12</sys_created_on>
+            <sys_id>bbf310160f2a6a0034457d4ce1050ee1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:12</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>wf_condition</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+            <sys_created_on>2016-10-20 17:42:54</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_id>4e24d8560f2a6a0034457d4ce1050eab</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name/>
+            <sys_package/>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+            <sys_update_name/>
+            <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-20 17:42:54</sys_updated_on>
+            <sys_user display_value="Courtney Richards">6333dc460fd721006aa57d4ce1050e07</sys_user>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

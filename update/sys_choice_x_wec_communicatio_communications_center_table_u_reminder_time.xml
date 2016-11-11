@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="u_reminder_time" table="x_wec_communicatio_communications_center_table" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_reminder_time</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>10 min</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>0</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-29 13:21:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>840f8bd30f8a620034457d4ce1050e06</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-29 13:21:46</sys_updated_on>
+            <value>10 min</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_reminder_time</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>15 min</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>1</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-29 13:21:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>4c0f8bd30f8a620034457d4ce1050e06</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-29 13:21:46</sys_updated_on>
+            <value>15 min</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_reminder_time</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>30 min</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>2</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-29 13:21:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>400f8bd30f8a620034457d4ce1050e07</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-29 13:21:46</sys_updated_on>
+            <value>30 min</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_reminder_time</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>45 min</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>3</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-29 13:21:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>440f8bd30f8a620034457d4ce1050e07</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-29 13:21:46</sys_updated_on>
+            <value>45 min</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_reminder_time</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>1 Hour</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>4</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-29 13:21:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>480f8bd30f8a620034457d4ce1050e07</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-29 13:21:46</sys_updated_on>
+            <value>1 Hour</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_reminder_time</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>1 Day</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>5</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-29 13:21:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>4c0f8bd30f8a620034457d4ce1050e07</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-29 13:21:46</sys_updated_on>
+            <value>1 Day</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_reminder_time</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>2 Days</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>6</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-29 13:21:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>400f8bd30f8a620034457d4ce1050e08</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-29 13:21:46</sys_updated_on>
+            <value>2 Days</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_reminder_time</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>1 Week</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>7</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-29 13:21:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>440f8bd30f8a620034457d4ce1050e08</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-29 13:21:46</sys_updated_on>
+            <value>1 Week</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>u_reminder_time</element>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-29 13:21:46</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>480f8bd30f8a620034457d4ce1050e06</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>u_reminder_time</sys_name>
+            <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+            <sys_update_name>sys_choice_x_wec_communicatio_communications_center_table_u_reminder_time</sys_update_name>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-29 13:21:46</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

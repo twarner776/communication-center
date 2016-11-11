@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sysevent_email_action">
+    <sysevent_email_action action="INSERT_OR_UPDATE">
+        <action_insert>true</action_insert>
+        <action_update>true</action_update>
+        <active>true</active>
+        <advanced_condition/>
+        <affected_field_on_event/>
+        <collection>x_wec_communicatio_communications_center_table</collection>
+        <condition table="x_wec_communicatio_communications_center_table">u_status=Draft^u_notification_type=External Premium Support^EQ<item endquery="false" field="u_status" goto="false" newquery="false" operator="=" or="false" value="Draft"/>
+            <item endquery="false" field="u_notification_type" goto="false" newquery="false" operator="=" or="false" value="External Premium Support"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <content_type>text/html</content_type>
+        <description>TWC Core Communications Center Notification - External Premium Support</description>
+        <event_name>x_wec_communicatio.cc.notification</event_name>
+        <event_parm_1>false</event_parm_1>
+        <event_parm_2>false</event_parm_2>
+        <exclude_delegates>false</exclude_delegates>
+        <force_delivery>false</force_delivery>
+        <from>noreply@weather.com</from>
+        <generation_type>engine</generation_type>
+        <importance/>
+        <include_attachments>false</include_attachments>
+        <item>event.parm1</item>
+        <item_table/>
+        <mandatory>false</mandatory>
+        <message/>
+        <message_html/>
+        <message_list/>
+        <message_text/>
+        <name>TWC Core - CC - External Premium (Draft)</name>
+        <omit_watermark>false</omit_watermark>
+        <order>110</order>
+        <push_message_only>false</push_message_only>
+        <recipient_fields>sys_updated_by</recipient_fields>
+        <recipient_groups/>
+        <recipient_users/>
+        <reply_to>noreply@weather.com</reply_to>
+        <send_self>true</send_self>
+        <sms_alternate/>
+        <style/>
+        <subject>${u_title} - ${u_status}</subject>
+        <subscribable>false</subscribable>
+        <sys_class_name>sysevent_email_action</sys_class_name>
+        <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+        <sys_created_on>2016-10-18 15:31:06</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_id>bbc261650feee60034457d4ce1050e22</sys_id>
+        <sys_mod_count>23</sys_mod_count>
+        <sys_name>TWC Core - CC - External Premium (Draft)</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sysevent_email_action_bbc261650feee60034457d4ce1050e22</sys_update_name>
+        <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+        <sys_updated_on>2016-10-21 13:48:30</sys_updated_on>
+        <sys_version>2</sys_version>
+        <template display_value="TWC Core - CC - External Premium">37e0e1e10feee60034457d4ce1050e29</template>
+        <type>email</type>
+        <weight>410</weight>
+    </sysevent_email_action>
+</record_update>

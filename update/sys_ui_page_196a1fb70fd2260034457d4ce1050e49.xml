@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_wec_communicatio_preview-notification.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<h4 style="margin-top: 0;" ng-if="vm.showFields.title">{{vm.item.u_title.value}}</h4>
+	
+	<p><span style="color: blue;">Notification Type:&#160;</span>{{vm.item.u_notification_type.value}}</p>
+	
+	<p ng-if="vm.item.sys_created_by.value"><span style="color: blue;">Created By:&#160;</span>{{vm.item.sys_created_by.display_value}}</p>
+	
+	<p ng-if="vm.item.u_verified_by.value"><span style="color: blue;">Verified By:&#160;</span>{{vm.item.u_verified_by.display_value}}</p>
+	
+	<p ng-if="vm.item.u_verified.value"><span style="color: blue;">Verified:&#160;</span>{{vm.item.u_verified.display_value}}</p>
+	
+	<p><span style="color: blue;">Reminder:&#160;</span>{{vm.item.u_reminder.value}}</p>
+	
+	<p><span style="color: blue;">Reminder time:&#160;</span>{{vm.item.u_reminder_time.value}}</p>
+	
+	<p><span style="color: blue;">Sent to:&#160;</span>{{vm.item.u_external_email.value}}</p>
+	
+	<p><span style="color: blue;">Status:&#160;</span>{{vm.item.u_status.value}}</p>
+	
+	<p ng-if="vm.showFields.u_current_status"><span style="color: blue;">Current status:&#160;</span>{{vm.item.u_current_status.value}}</p>
+	
+	<p ng-if="vm.showFields.u_resolution_time"><span style="color: blue;">Resolution Time:&#160;</span>{{vm.item.u_resolution_time.value}}</p>
+	
+	<p ng-if="vm.showFields.u_mttr"><span style="color: blue;">MTTR:&#160;</span>{{vm.item.u_mttr.value}}</p>
+	
+	<p ng-if="vm.showFields.u_incident_source"><span style="color: blue;">Incident Source:&#160;</span>{{vm.item.u_incident_source.value}}</p>
+	
+	<p ng-if="vm.showFields.u_description"><span style="color: blue;">Description:&#160;</span>{{vm.item.u_description.value}}</p>
+	
+	<p ng-if="vm.showFields.u_impact"><span style="color: blue;">Impact:&#160;</span>{{vm.item.u_impact.value}}</p>
+	
+	<p ng-if="vm.showFields.u_latest_info"><span style="color: blue;">Latest Info:&#160;</span>{{vm.item.u_latest_info.value}}</p>
+	
+	<p ng-if="vm.showFields.u_next_step"><span style="color: blue;">Next Step:&#160;</span>{{vm.item.u_next_step.value}}</p>
+	
+	<p ng-if="vm.showFields.u_bridge_status"><span style="color: blue;">Bridge:&#160;</span>{{vm.item.u_bridge_status.value}}</p>
+	
+	<p ng-if="vm.showFields.u_location"><span style="color: blue;">Location:&#160;</span>{{vm.item.u_location.value}}</p>
+
+	<p ng-if="vm.showFields.u_location_independent"><span style="color: blue;">Location:&#160;</span>{{vm.item.u_location.display_value}}</p>
+
+	<p ng-if="vm.showFields.u_product"><span style="color: blue;">Configuration Item:&#160;</span>{{vm.item.u_product.display_value}}</p>
+
+	<p ng-if="vm.showFields.u_product_independent"><span style="color: blue;">Configuration Item:&#160;</span>{{vm.item.u_product.display_value}}</p>
+	
+	<p ng-if="vm.showFields.u_servicenow_ticket"><span style="color: blue;">Servicenow Ticket:&#160;</span>{{vm.item.u_servicenow_ticket.display_value}}</p>
+	
+	<p ng-if="vm.showFields.u_incident_ticket_priority"><span style="color: blue;">Incident Ticket Priority:&#160;</span>{{vm.item.u_incident_ticket_priority.value}}</p>
+	
+	<p ng-if="vm.showFields.u_incident_owner"><span style="color: blue;">Incident Owner:&#160;</span>{{vm.item.u_incident_owner.value}}</p>
+	
+	<p ng-if="vm.showFields.u_incident_history"><span style="color: blue;">Incident History:&#160;</span>{{vm.item.u_incident_history.value}}</p>
+
+	<p ng-if="vm.showFields.u_maintenance_start_time"><span style="color: blue;">Maintenance Start Time:&#160;</span>{{vm.item.u_maintenance_start_time.display_value | date : 'yyyy-MM-dd h:mm a'}}</p>
+
+	<p ng-if="vm.showFields.u_maintenance_projected_end_time"><span style="color: blue;">Maintenance Projected End Time :&#160;</span>{{vm.item.u_maintenance_projected_end_time.display_value | date : 'yyyy-MM-dd h:mm a'}}</p>
+
+	<p ng-if="vm.showFields.u_actual_maintenance_end_time"><span style="color: blue;">Actual Maintenance End Time :&#160;</span>{{vm.item.u_actual_maintenance_end_time.display_value | date : 'yyyy-MM-dd h:mm a'}}</p>
+
+	<p ng-if="vm.showFields.u_rfc"><span style="color: blue;">RFC #:&#160;</span>{{vm.item.u_rfc.display_value}}</p>
+	
+	<p ng-if="vm.showFields.u_maintenance_poc"><span style="color: blue;">Maintenance POC:&#160;</span>{{vm.item.u_maintenance_poc.display_value}}</p>
+	
+	<p ng-if="vm.showFields.u_maintenance_history"><span style="color: blue;">Maintenance History:&#160;</span>{{vm.item.u_maintenance_history.value}}</p>
+
+	<p ng-if="vm.showFields.u_text_field_1"><span style="color: blue;">Text Field 1:&#160;</span>{{vm.item.u_text_field_1.value}}</p>
+	
+	<p ng-if="vm.showFields.u_text_field_2"><span style="color: blue;">Text Field 2:&#160;</span>{{vm.item.u_text_field_2.value}}</p>
+	
+	<p ng-if="vm.showFields.u_text_field_3"><span style="color: blue;">Text Field 3:&#160;</span>{{vm.item.u_text_field_3.value}}</p>
+	
+	<p ng-if="vm.showFields.u_text_field_4"><span style="color: blue;">Text Field 4:&#160;</span>{{vm.item.u_text_field_4.value}}</p>
+	
+	<p ng-if="vm.showFields.u_text_field_5"><span style="color: blue;">Text Field 5:&#160;</span>{{vm.item.u_text_field_5.value}}</p>
+	
+	<p ng-if="vm.showFields.u_text_field_6"><span style="color: blue;">Text Field 6:&#160;</span>{{vm.item.u_text_field_6.value}}</p>
+
+</j:jelly>]]></html>
+        <name>preview-notification</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-13 13:44:34</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>196a1fb70fd2260034457d4ce1050e49</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>preview-notification</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_page_196a1fb70fd2260034457d4ce1050e49</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-07 13:33:02</sys_updated_on>
+    </sys_ui_page>
+</record_update>

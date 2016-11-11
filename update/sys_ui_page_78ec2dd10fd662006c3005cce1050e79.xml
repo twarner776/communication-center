@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_wec_communicatio_dashboard-tpl.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<style>
+	
+	.abbr{
+		cursor: help;
+		border-bottom: 1px dotted #777;
+	}		
+	.menu:hover {
+		background-color: #eee!important;
+	}	
+		
+	tags-input .tags {
+		height: initial;
+	}
+	
+	tags-input .host{
+		height: initial;
+	}
+		
+	</style>
+	
+	<ol class="breadcrumb">
+		<li><a href="https://service.weather.com">Home</a></li>
+		<li><a href="/x_wec_product_box-app.do#/dashboard">My Apps</a></li>
+		<li class="active">Communications Center</li>
+	</ol>
+
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<p style="text-align:center;"><a href="" ui-sref="notification" class="btn btn-primary btn-sm" >Create Internal Communication</a>&#160;<a href="" ui-sref="notification({n_type: 'Trust Site'})" class="btn btn-danger btn-sm" >Create External Post</a></p>
+		</div>
+	</div>
+
+	
+	
+		<div class="row">
+		  <div class="col-sm-4 col-sm-offset-4">
+			  <form ng-submit="vm.search()" style="margin-bottom: 1px;">
+					<div class="input-group input-group-sm">
+
+						  <input type="text" class="form-control" placeholder="Please enter search value" ng-model="vm.modelSearch"/>
+						  <span class="input-group-btn">
+							<button class="btn btn-default" type="button" ng-click="vm.search()">Go!</button>
+						  </span>
+
+					</div>
+			</form>
+		  </div>
+		  <div class="col-sm-4 col-sm-offset-4">
+			  <a href="" style="font-size: 12px;font-style: italic;" ng-click="vm.showTagInput = true" ng-show="!vm.showTagInput">Use tag search</a>
+			  <tags-input ng-model="vm.modelSearchTags" display-property="name" class="ti-input-sm" ng-show="vm.showTagInput">
+				  <auto-complete source="vm.searchLabel($query)" min-length="2"></auto-complete>
+			  </tags-input>
+		  </div>
+		</div>
+			
+		
+	<div class="row">
+		<div class="col-sm-12">
+			<p style="text-align:center;">Click on the &#160;<i class="fa fa-search" aria-hidden="true"></i>&#160; to preview the communication below</p>
+		</div>
+	</div>
+		
+	<uib-tabset active="vm.tabsActive">
+
+		<uib-tab ng-repeat="tab in vm.tabs" heading="{{tab.title}}" disable="tab.disabled" index="tab.index" select="vm.initTable(tab)">
+			<uib-tab-heading>
+				{{tab.title}} <a ng-click="vm.removeTab($index)" href='' ng-if="tab.type !== 'standart'" style="position: absolute; top: 0;"><i class="fa fa-times" aria-hidden="true"></i></a>
+			</uib-tab-heading>			
+			
+			<div class="alert alert-info twc-alerts" role="alert"><h4 style="margin-bottom: 0px; text-align: center;">{{tab.title}}</h4></div>
+			<div class="row">
+				<div ng-class="{'col-sm-8': vm.preview, 'col-sm-12': !vm.preview}">
+
+						<table ng-table="tab.table" class="table table-striped twc-table">
+							<tr ng-repeat="row in $data track by $index">
+								<td data-title="'Number'" filter="{number: 'text'}" sortable="'number'" style="width:12%;" ng-if="vm.getActiveRow().rest === 'notificationList'">
+									<a href="" ng-click="vm.loadPreview(row);" uib-tooltip="Preview Message" tooltip-append-to-body="true"><i class="fa fa-search" aria-hidden="true"></i></a>
+									&#160;&#160;
+									<span ng-if="vm.showArrows(row)">
+										<i class="fa fa-reply fa-rotate-180" aria-hidden="true"></i>&#160;&#160; 
+									</span>
+									<a href="" ui-sref="notification.edit({id: row.sys_id.value})" uib-tooltip="Edit Notification" tooltip-append-to-body="true">{{row.number.display_value}}</a>
+								</td>
+								<td data-title="'Notification Type'" sortable="'u_notification_type'" filter="{u_notification_type: 'select'}" filter-data="vm.getNotificationTypes" style="width:12%;" ng-if="vm.getActiveRow().rest === 'notificationList'">{{row.u_notification_type.display_value}}</td>
+								<td data-title="'Title'" filter="{u_title: 'text'}" sortable="'u_title'" ng-if="vm.getActiveRow().rest === 'notificationList'">{{row.u_title.display_value}}</td>
+								<td data-title="'Time Sent'"  sortable="'u_scheduled_time'" ng-if="vm.getActiveRow().rest === 'notificationList'">{{row.u_scheduled_time.display_value}}</td>
+								<td data-title="'Sent to'" ng-if="vm.getActiveRow().rest === 'notificationList'">
+									<span class="abbr" uib-tooltip="{{row.u_send_to_users.display_value}}" ng-if="vm.getActiveRow().rest === 'notificationList'">Users: {{row.u_send_to_users.value?row.u_send_to_users.value.split(',').length:'-'}}</span>, 
+									<span class="abbr" uib-tooltip="{{row.u_send_to_groups.display_value}}" ng-if="vm.getActiveRow().rest === 'notificationList'">Groups: {{row.u_send_to_groups.value?row.u_send_to_groups.value.split(',').length:'-'}}</span>
+								</td>
+								<td data-title="'Created By'"  sortable="'sys_created_by'" filter="{sys_created_by: 'search-sys-user'}" ng-if="vm.getActiveRow().rest === 'notificationList'">{{row.sys_created_by.display_value}}</td>
+								<td data-title="'Status'"  sortable="'u_status'" filter="{u_status: 'select'}" filter-data="vm.getStatus" ng-if="vm.getActiveRow().rest === 'notificationList'">{{row.u_status.display_value}}</td>
+								<td data-title="'Display in UI'"  sortable="'u_change_display'" ng-if="vm.showField()"><span ng-show="row.u_notification_type.value === 'Change Freeze'">
+									{{row.u_change_display.display_value}}&#160;
+
+									<button uib-tooltip="Remove Alert" class="btn btn-default btn-xs" ng-click="vm.hideChangeFreeze(row);"  ng-if="row.u_change_display.display_value === 'True'"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+
+									</span></td>
+								<td data-title="'Action'" ng-if="vm.getActiveRow().rest === 'notificationList'">
+
+									 <div class="btn-group pull-right" uib-dropdown="true">
+									  <button class="btn btn-default dropdown-toggle btn-xs pull-right" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" uib-dropdown-toggle="true">
+										<i class="fa fa-cogs" aria-hidden="true"></i>
+										<span class="caret"></span>
+									  </button>
+									  <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu"  uib-dropdown-menu="true">
+										<li role="menuitem" ng-class="{disabled: !row.u_parent_child_threading.value}"><a class="menu" href="#" ui-sref="notification.edit({id: row.sys_id.value, type: 'child', parent: row.u_parent_child_threading.value})">Create Update / Child Notification</a></li>
+										<li role="menuitem"><a class="menu" href="#" ui-sref="notification.edit({id: row.sys_id.value, type: 'resend'})">Create New / Copy Data</a></li>
+										<li role="menuitem" ng-class="{disabled: !row.u_parent_child_threading.value}"><a class="menu" href="#" ui-sref="dashboard({type: 'thread', threadId: row.u_parent_child_threading.value})">Show Existing Thread</a></li>
+									  </ul>
+									</div>								
+								</td>
+								
+								<!-- next table -->
+								<td data-title="'Number'" filter="{u_number: 'text'}" sortable="'u_number'" ng-if="vm.getActiveRow().rest === 'trustList'">{{row.u_number.display_value}}</td>
+								<td data-title="'Product'" sortable="'u_product_ref'" ng-if="vm.getActiveRow().rest === 'trustList'">{{row.u_product_ref.display_value}}</td>
+								<td data-title="'Status'" sortable="'u_status'" ng-if="vm.getActiveRow().rest === 'trustList'">{{row.u_status.display_value}}</td>
+								<td data-title="'Description'" sortable="'u_description'" uib-tooltip="{{row.u_description.display_value}}" tooltip-append-to-body="true" ng-if="vm.getActiveRow().rest === 'trustList'">{{row.u_description.display_value | limitTo: 30}}{{row.u_description.display_value.length > 30 ? '...' : ''}}</td>
+								<td data-title="'Created on'" sortable="'sys_created_on'" ng-if="vm.getActiveRow().rest === 'trustList'">{{row.sys_created_on.display_value}}</td>
+								<td data-title="'Created by'" sortable="'sys_created_by'" filter="{sys_created_by: 'search-sys-user'}" ng-if="vm.getActiveRow().rest === 'trustList'">{{row.sys_created_by.display_value}}</td>
+								
+								
+							</tr>
+						</table>
+					
+					
+	
+				</div>
+				<div ng-class="{'col-sm-4': vm.preview}" ng-if="vm.preview">
+					<div class="panel panel-default">
+					  <a ng-click="vm.preview = false;" href='' style="position: absolute; top: 5px; right: 20px;"><i class="fa fa-times" aria-hidden="true"></i></a>	
+					  <div class="panel-body" style="font-size: 12px;">
+						<p style="text-align: center;" ng-if="!vm.preview">Click on the &#160;<i class="fa fa-search" aria-hidden="true"></i>&#160; to preview the communication below</p>
+						<div ng-if="vm.preview">
+							<preview-notification item="vm.preview"></preview-notification>
+						</div>  
+					  </div>
+					</div>			
+					
+				</div>
+			</div>
+		</uib-tab>
+		
+	</uib-tabset>
+	
+	
+	
+</j:jelly>
+]]></html>
+        <name>dashboard-tpl</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-05 11:21:16</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>78ec2dd10fd662006c3005cce1050e79</sys_id>
+        <sys_mod_count>143</sys_mod_count>
+        <sys_name>dashboard-tpl</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_page_78ec2dd10fd662006c3005cce1050e79</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-09 09:05:49</sys_updated_on>
+    </sys_ui_page>
+</record_update>

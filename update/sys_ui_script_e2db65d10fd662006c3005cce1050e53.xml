@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_wec_communicatio.app</name>
+        <script><![CDATA[(function () {
+    'use strict';
+
+angular
+    .module('twc-product', [
+        'ngResource',
+        'ngAnimate',
+        'ngSanitize',
+		'ngTable',
+        'blockUI',
+        'ui.bootstrap',
+		'ui.router',
+		'toastr',
+		'ui.select',
+		'ngTagsInput'
+    ])
+
+	.config(['$stateProvider', '$urlRouterProvider',  function($stateProvider, $urlRouterProvider) {
+		
+		$urlRouterProvider.when('', '/dashboard');
+		$stateProvider
+		
+		.state('dashboard', {
+            url: '/dashboard?type&threadId&q&tags',
+			controller: 'NCDashboardCtrl',
+			controllerAs: 'vm',
+            templateUrl: 'x_wec_communicatio_dashboard-tpl.do'
+        })
+		
+		.state('notification', {
+            url: '/notification?n_type',
+			controller: 'NCNotificationCtrl',
+			controllerAs: 'vm',
+            templateUrl: 'x_wec_communicatio_notification.do',
+			data: {label: 'Create new notification'},
+			resolve:{
+				notificationTypes: function (CommunicatioFactory){
+					return CommunicatioFactory.notificationTypes().$promise
+				},
+				currentStatus: function (CommunicatioFactory){
+					return CommunicatioFactory.currentStatus().$promise
+				},
+				reminderTime: function (CommunicatioFactory){
+					return CommunicatioFactory.reminderTime().$promise
+				},
+				
+				currentTime: function (CommunicatioFactory){
+					return CommunicatioFactory.getCurrentTime().$promise
+				},
+				groupsTypes: function (CommunicatioFactory){
+					return CommunicatioFactory.getGroupTypes({sysparm_query: 'name=Agile Team'}).$promise
+				},
+				trustStatus: function (CommunicatioFactory){
+					return CommunicatioFactory.trustStatus().$promise
+				}				
+				
+			}
+			
+        })
+
+		.state('notification.edit', {
+            url: '/:id?type&parent',
+			controller: 'NCNotificationCtrl',
+			controllerAs: 'vm',
+            templateUrl: 'x_wec_communicatio_notification.do',
+			data: {label: 'Edit notification'},
+			resolve:{
+				notificationTypes: function (CommunicatioFactory){
+					return CommunicatioFactory.notificationTypes().$promise
+				}
+				
+			}
+        })
+		
+		
+		;
+	
+		
+	}])
+
+    .provider('userService', function () {
+		var options = {};
+		this.config = function (opt) {
+			angular.extend(options, opt);
+		};
+		this.$get = [function () {
+			if (!options) {
+				throw new Error('Config options must be configured');
+			}
+			return options;
+		}];
+	})
+
+    .config(['blockUIConfig', function(blockUIConfig) {
+        blockUIConfig.delay = 400;
+		
+        blockUIConfig.requestFilter = function(config) {
+			
+			if(config.params && config.params.hasOwnProperty('preloader')){
+				return false;
+			}
+        };
+		
+    }])
+
+	.config(function(toastrConfig) {
+	  angular.extend(toastrConfig, {
+
+		  positionClass: 'toast-top-center',
+		  timeOut: 2000,
+	  });
+	})
+
+	.config(['$provide', '$httpProvider', function($provide, $httpProvider) {
+        
+		$provide.factory('errHttpInterceptor', function($q, $rootScope, $injector) {
+            return {
+                'responseError': function(rejection) {
+					if(rejection.status !== 200) {
+                        var msg = 'An unexpected error occurred.',
+                            title = '<b>' + rejection.status + ' ' + rejection.statusText + '</b>',
+							uibModal = $injector.get('$uibModal');
+
+							uibModal.open({
+
+								templateUrl: '/x_wec_product_modal-dialog-tpl.do',
+								size: 'lg',
+								controller: function ($scope, $uibModalInstance) {
+									var dlg = this;
+
+									dlg.close = close;
+									
+									dlg.title = rejection.statusText;
+									dlg.body = rejection.data.error.message;
+
+									function close () {
+										$uibModalInstance.close();
+									}
+
+								},
+								controllerAs: "dlg"
+							});			
+
+                    }
+                    return $q.reject(rejection);
+                }
+
+
+            }
+        });
+
+        $httpProvider.interceptors.push('errHttpInterceptor');
+
+    }])
+
+  .constant('msdElasticConfig', {
+    append: ''
+  })
+
+	.directive('validDate', function () {
+		return {
+			restrict: 'A',
+			require: 'ngModel',
+			link: function (scope, element, attrs, control) {
+				control.$parsers.push(function (viewValue) {
+					var newDate = viewValue;
+					control.$setValidity("invalidDate", true);  
+					if (typeof newDate === "object" || newDate == "") return newDate;
+					if (!newDate.match(/^(\d{4})-(\d{2})-(\d{2})$/))
+						control.$setValidity("invalidDate", false);
+					return viewValue;
+				});
+			}
+		};
+	})
+
+  .directive('msdElastic', [
+    '$timeout', '$window', 'msdElasticConfig',
+    function($timeout, $window, config) {
+      'use strict';
+
+      return {
+        require: 'ngModel',
+        restrict: 'A, C',
+        link: function(scope, element, attrs, ngModel) {
+
+          // cache a reference to the DOM element
+          var ta = element[0],
+              $ta = element;
+
+          // ensure the element is a textarea, and browser is capable
+          if (ta.nodeName !== 'TEXTAREA' || !$window.getComputedStyle) {
+            return;
+          }
+
+          // set these properties before measuring dimensions
+          $ta.css({
+            'overflow': 'hidden',
+            'overflow-y': 'hidden',
+            'word-wrap': 'break-word'
+          });
+
+          // force text reflow
+          var text = ta.value;
+          ta.value = '';
+          ta.value = text;
+
+          var append = attrs.msdElastic ? attrs.msdElastic.replace(/\\n/g, '\n') : config.append,
+              $win = angular.element($window),
+              mirrorInitStyle = 'position: absolute; top: -999px; right: auto; bottom: auto;' +
+                                'left: 0; overflow: hidden; -webkit-box-sizing: content-box;' +
+                                '-moz-box-sizing: content-box; box-sizing: content-box;' +
+                                'min-height: 0 !important; height: 0 !important; padding: 0;' +
+                                'word-wrap: break-word; border: 0;',
+              $mirror = angular.element('<textarea aria-hidden="true" tabindex="-1" ' +
+                                        'style="' + mirrorInitStyle + '"/>').data('elastic', true),
+              mirror = $mirror[0],
+              taStyle = getComputedStyle(ta),
+              resize = taStyle.getPropertyValue('resize'),
+              borderBox = taStyle.getPropertyValue('box-sizing') === 'border-box' ||
+                          taStyle.getPropertyValue('-moz-box-sizing') === 'border-box' ||
+                          taStyle.getPropertyValue('-webkit-box-sizing') === 'border-box',
+              boxOuter = !borderBox ? {width: 0, height: 0} : {
+                            width:  parseInt(taStyle.getPropertyValue('border-right-width'), 10) +
+                                    parseInt(taStyle.getPropertyValue('padding-right'), 10) +
+                                    parseInt(taStyle.getPropertyValue('padding-left'), 10) +
+                                    parseInt(taStyle.getPropertyValue('border-left-width'), 10),
+                            height: parseInt(taStyle.getPropertyValue('border-top-width'), 10) +
+                                    parseInt(taStyle.getPropertyValue('padding-top'), 10) +
+                                    parseInt(taStyle.getPropertyValue('padding-bottom'), 10) +
+                                    parseInt(taStyle.getPropertyValue('border-bottom-width'), 10)
+                          },
+              minHeightValue = parseInt(taStyle.getPropertyValue('min-height'), 10),
+              heightValue = parseInt(taStyle.getPropertyValue('height'), 10),
+              minHeight = Math.max(minHeightValue, heightValue) - boxOuter.height,
+              maxHeight = parseInt(taStyle.getPropertyValue('max-height'), 10),
+              mirrored,
+              active,
+              copyStyle = ['font-family',
+                           'font-size',
+                           'font-weight',
+                           'font-style',
+                           'letter-spacing',
+                           'line-height',
+                           'text-transform',
+                           'word-spacing',
+                           'text-indent'];
+
+          // exit if elastic already applied (or is the mirror element)
+          if ($ta.data('elastic')) {
+            return;
+          }
+
+          // Opera returns max-height of -1 if not set
+          maxHeight = maxHeight && maxHeight > 0 ? maxHeight : 9e4;
+
+          // append mirror to the DOM
+          if (mirror.parentNode !== document.body) {
+            angular.element(document.body).append(mirror);
+          }
+
+          // set resize and apply elastic
+          $ta.css({
+            'resize': (resize === 'none' || resize === 'vertical') ? 'none' : 'horizontal'
+          }).data('elastic', true);
+
+          /*
+           * methods
+           */
+
+          function initMirror() {
+            var mirrorStyle = mirrorInitStyle;
+
+            mirrored = ta;
+            // copy the essential styles from the textarea to the mirror
+            taStyle = getComputedStyle(ta);
+            angular.forEach(copyStyle, function(val) {
+              mirrorStyle += val + ':' + taStyle.getPropertyValue(val) + ';';
+            });
+            mirror.setAttribute('style', mirrorStyle);
+          }
+
+          function adjust() {
+            var taHeight,
+                taComputedStyleWidth,
+                mirrorHeight,
+                width,
+                overflow;
+
+            if (mirrored !== ta) {
+              initMirror();
+            }
+
+            // active flag prevents actions in function from calling adjust again
+            if (!active) {
+              active = true;
+
+              mirror.value = ta.value + append; // optional whitespace to improve animation
+              mirror.style.overflowY = ta.style.overflowY;
+
+              taHeight = ta.style.height === '' ? 'auto' : parseInt(ta.style.height, 10);
+
+              taComputedStyleWidth = getComputedStyle(ta).getPropertyValue('width');
+
+              // ensure getComputedStyle has returned a readable 'used value' pixel width
+              if (taComputedStyleWidth.substr(taComputedStyleWidth.length - 2, 2) === 'px') {
+                // update mirror width in case the textarea width has changed
+                width = parseInt(taComputedStyleWidth, 10) - boxOuter.width;
+                mirror.style.width = width + 'px';
+              }
+
+              mirrorHeight = mirror.scrollHeight;
+
+              if (mirrorHeight > maxHeight) {
+                mirrorHeight = maxHeight;
+                overflow = 'scroll';
+              } else if (mirrorHeight < minHeight) {
+                mirrorHeight = minHeight;
+              }
+              mirrorHeight += boxOuter.height;
+              ta.style.overflowY = overflow || 'hidden';
+
+              if (taHeight !== mirrorHeight) {
+                scope.$emit('elastic:resize', $ta, taHeight, mirrorHeight);
+                ta.style.height = mirrorHeight + 'px';
+              }
+
+              // small delay to prevent an infinite loop
+              $timeout(function() {
+                active = false;
+              }, 1, false);
+
+            }
+          }
+
+          function forceAdjust() {
+            active = false;
+            adjust();
+          }
+
+          /*
+           * initialise
+           */
+
+          // listen
+          if ('onpropertychange' in ta && 'oninput' in ta) {
+            // IE9
+            ta['oninput'] = ta.onkeyup = adjust;
+          } else {
+            ta['oninput'] = adjust;
+          }
+
+          $win.bind('resize', forceAdjust);
+
+          scope.$watch(function() {
+            return ngModel.$modelValue;
+          }, function(newValue) {
+            forceAdjust();
+          });
+
+          scope.$on('elastic:adjust', function() {
+            initMirror();
+            forceAdjust();
+          });
+
+          $timeout(adjust, 0, false);
+
+          /*
+           * destroy
+           */
+
+          scope.$on('$destroy', function() {
+            $mirror.remove();
+            $win.unbind('resize', forceAdjust);
+          });
+        }
+      };
+    }
+  ])
+
+	.run(function ($http, $templateCache) { 
+
+		$http.defaults.headers.common['X-UserToken'] = userToken; 
+	
+	$templateCache.put('ng-table/filters/search-sys-user.html', '<input type="text" class="form-control input-sm" placeholder="Please typeahead search value" uib-typeahead="user as user.name for user in vm.searchUserByName($viewValue)" ng-keyup="vm.reloadTable(searchSysUser, \'sys_created_by\')" typeahead-on-select="params.filter()[name] = $item.email" typeahead-wait-ms="500" ng-model="searchSysUser"/>');
+
+	
+	});
+
+	
+	
+	$.ajaxSetup({headers: {"X-UserToken": userToken}});
+	$.get('/api/now/table/sys_user/' + userId, function (userData) {
+		
+		$.get('/api/x_wec_product/table/sys_user_has_role?sysparm_query=user%3D' + userId, function (userRole) {
+
+			angular.module('twc-product').config(['userServiceProvider', function (userServiceProvider) {
+
+				userData.result['roles'] = userRole.result;
+				
+				userServiceProvider.config(userData.result);
+
+			}]);
+
+			angular.bootstrap(document, ['twc-product']);
+
+		});
+		
+    });
+	
+})();
+
+
+]]></script>
+        <script_name>app</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-05 11:20:48</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>e2db65d10fd662006c3005cce1050e53</sys_id>
+        <sys_mod_count>28</sys_mod_count>
+        <sys_name>x_wec_communicatio.app</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_script_e2db65d10fd662006c3005cce1050e53</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-09 08:42:46</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

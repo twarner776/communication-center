@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="u_current_status" table="x_wec_communicatio_communications_center_table" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_current_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Initial</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>0</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-27 19:08:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>b62b4e320f06220034457d4ce1050ec9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-27 19:08:26</sys_updated_on>
+            <value>Initial</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_current_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>On Going</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>1</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-27 19:08:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>3e2b4e320f06220034457d4ce1050ec9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-27 19:08:26</sys_updated_on>
+            <value>On Going</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_current_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Resolved</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>2</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-27 19:08:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>fe2b4e320f06220034457d4ce1050ec9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-27 19:08:26</sys_updated_on>
+            <value>Resolved</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_current_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Reminder</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>3</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-30 17:06:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>39fbc1bb0f4aa20034457d4ce1050e2f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-30 17:06:14</sys_updated_on>
+            <value>Reminder</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_current_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Completed</label>
+            <language>en</language>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sequence>4</sequence>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-10-21 16:37:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_id>bebe812a0fe2aa0034457d4ce1050e11</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-21 16:37:18</sys_updated_on>
+            <value>Completed</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>u_current_status</element>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-27 19:08:26</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>3a2b4e320f06220034457d4ce1050ec9</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_name>u_current_status</sys_name>
+            <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+            <sys_update_name>sys_choice_x_wec_communicatio_communications_center_table_u_current_status</sys_update_name>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-10-21 16:37:18</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

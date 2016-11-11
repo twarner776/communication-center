@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sysevent_email_template">
+    <sysevent_email_template action="INSERT_OR_UPDATE">
+        <collection>x_wec_communicatio_communications_center_table</collection>
+        <message/>
+        <message_html><![CDATA[<p><strong><span style="font-size: 24px; color: #000000;">${u_title}</span></strong>&nbsp;</p>
+<p style="font-size: 11px;"><br /><font size="2" face="verdana,geneva"><strong>Current Status:</strong> ${u_current_status}</font></p>
+<p style="font-size: 11px;"><font size="2" face="verdana,geneva"><strong>Description:</strong> ${u_description}</font></p>
+<p style="font-size: 11px;"><font size="2" face="verdana,geneva"><strong>Latest Info:</strong> ${u_latest_info}</font></p>
+<p style="font-size: 11px;"><font size="2" face="verdana,geneva"><strong>Location:</strong> ${u_location}</font></p>
+<p style="margin: 0px 0px 0.0001pt; color: #333333; font-size: 14px;">&nbsp;</p>]]></message_html>
+        <message_list/>
+        <message_text/>
+        <name>TWC Core - CC - Informational</name>
+        <sms_alternate/>
+        <subject>${u_title}</subject>
+        <sys_class_name>sysevent_email_template</sys_class_name>
+        <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+        <sys_created_on>2016-10-18 15:25:17</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>367121650feee60034457d4ce1050ef2</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>TWC Core - CC - Informational</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sysevent_email_template_367121650feee60034457d4ce1050ef2</sys_update_name>
+        <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-01 18:17:22</sys_updated_on>
+        <sys_version>2</sys_version>
+    </sysevent_email_template>
+</record_update>

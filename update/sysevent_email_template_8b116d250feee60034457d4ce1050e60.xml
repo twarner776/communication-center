@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sysevent_email_template">
+    <sysevent_email_template action="INSERT_OR_UPDATE">
+        <collection>x_wec_communicatio_communications_center_table</collection>
+        <message/>
+        <message_html><![CDATA[<div style="font-size: 12.8px;">
+<p><strong><span style="font-size: 24px; color: #000000;">${u_title}</span></strong>&nbsp;</p>
+<span style="font-size: 12.8px;">&nbsp;</span></div>
+<div style="font-size: 12.8px;"><font size="3"><strong>Description:</strong> ${u_description}</font></div>
+<div style="font-size: 12.8px;">
+<div style="color: #333333;">&nbsp;</div>
+</div>]]></message_html>
+        <message_list/>
+        <message_text/>
+        <name>TWC Core - CC - Security</name>
+        <sms_alternate/>
+        <subject>${u_title}</subject>
+        <sys_class_name>sysevent_email_template</sys_class_name>
+        <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+        <sys_created_on>2016-10-18 15:23:40</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>8b116d250feee60034457d4ce1050e60</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>TWC Core - CC - Security</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sysevent_email_template_8b116d250feee60034457d4ce1050e60</sys_update_name>
+        <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-01 21:10:26</sys_updated_on>
+        <sys_version>2</sys_version>
+    </sysevent_email_template>
+</record_update>

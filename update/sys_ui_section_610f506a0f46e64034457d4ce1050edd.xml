@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_section caption="" section_id="610f506a0f46e64034457d4ce1050edd" sys_domain="global" table="x_wec_communicatio_communications_center_table" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>number</element>
+            <position>0</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9e8209580f4b620034457d4ce1050efb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_title</element>
+            <position>1</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>128209580f4b620034457d4ce1050efc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_notification_type</element>
+            <position>2</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>928209580f4b620034457d4ce1050efc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_incident_owner</element>
+            <position>3</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>168209580f4b620034457d4ce1050efc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_maintenance_poc</element>
+            <position>4</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>968209580f4b620034457d4ce1050efc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_current_status</element>
+            <position>5</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1a8209580f4b620034457d4ce1050efc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_incident_start</element>
+            <position>6</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9a8209580f4b620034457d4ce1050efc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_product</element>
+            <position>7</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1e8209580f4b620034457d4ce1050efc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_servicenow_ticket</element>
+            <position>8</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9e8209580f4b620034457d4ce1050efc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_incident_ticket_priority</element>
+            <position>9</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>128209580f4b620034457d4ce1050efd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_rfc</element>
+            <position>10</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>928209580f4b620034457d4ce1050efd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_status</element>
+            <position>11</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>168209580f4b620034457d4ce1050efd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_record</element>
+            <position>12</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>968209580f4b620034457d4ce1050efd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_change_display</element>
+            <position>13</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1a8209580f4b620034457d4ce1050efd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_overriding_comm</element>
+            <position>14</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9a8209580f4b620034457d4ce1050efd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_parent_child_threading</element>
+            <position>15</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1e8209580f4b620034457d4ce1050efd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_tags</element>
+            <position>16</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9e8209580f4b620034457d4ce1050efd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>17</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>128209580f4b620034457d4ce1050efe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sys_created_on</element>
+            <position>18</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>928209580f4b620034457d4ce1050efe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sys_created_by</element>
+            <position>19</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>168209580f4b620034457d4ce1050efe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_verification_group</element>
+            <position>20</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>968209580f4b620034457d4ce1050efe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_verified</element>
+            <position>21</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1a8209580f4b620034457d4ce1050efe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_verified_by</element>
+            <position>22</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9a8209580f4b620034457d4ce1050efe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_incident_source</element>
+            <position>23</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1e8209580f4b620034457d4ce1050efe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_bridge_status</element>
+            <position>24</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9e8209580f4b620034457d4ce1050efe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_slack_channel</element>
+            <position>25</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>128209580f4b620034457d4ce1050eff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_public_slack_channel</element>
+            <position>26</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>928209580f4b620034457d4ce1050eff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_location</element>
+            <position>27</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>168209580f4b620034457d4ce1050eff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_mttr</element>
+            <position>28</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>968209580f4b620034457d4ce1050eff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_resolution_time</element>
+            <position>29</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1a8209580f4b620034457d4ce1050eff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_maintenance_start_time</element>
+            <position>30</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9a8209580f4b620034457d4ce1050eff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_actual_maintenance_end_time</element>
+            <position>31</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1e8209580f4b620034457d4ce1050eff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_maintenance_projected_end_time</element>
+            <position>32</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9e8209580f4b620034457d4ce1050eff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_trust_site_status</element>
+            <position>33</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>128249580f4b620034457d4ce1050e00</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_parent</element>
+            <position>34</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>928249580f4b620034457d4ce1050e00</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>35</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>168249580f4b620034457d4ce1050e00</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_slack_description</element>
+            <position>36</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>968249580f4b620034457d4ce1050e00</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_description</element>
+            <position>37</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1a8249580f4b620034457d4ce1050e00</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_impact</element>
+            <position>38</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9a8249580f4b620034457d4ce1050e00</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_latest_info</element>
+            <position>39</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>1e8249580f4b620034457d4ce1050e00</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_next_step</element>
+            <position>40</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>9e8249580f4b620034457d4ce1050e00</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_incident_history</element>
+            <position>41</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>128249580f4b620034457d4ce1050e01</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_maintenance_history</element>
+            <position>42</position>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-11-08 12:29:05</sys_created_on>
+            <sys_id>928249580f4b620034457d4ce1050e01</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_wec_communicatio_communications_center_table" sys_domain="global" view="Default view">610f506a0f46e64034457d4ce1050edd</sys_ui_section>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-11-08 12:29:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_wec_communicatio_communications_center_table</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>jason.lindsey@weather.com</sys_created_by>
+            <sys_created_on>2016-09-26 16:37:28</sys_created_on>
+            <sys_customer_update>true</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_id>610f506a0f46e64034457d4ce1050edd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_wec_communicatio_communications_center_table</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+            <sys_update_name>sys_ui_section_610f506a0f46e64034457d4ce1050edd</sys_update_name>
+            <sys_updated_by>jason.lindsey@weather.com</sys_updated_by>
+            <sys_updated_on>2016-09-26 16:37:28</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

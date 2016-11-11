@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_wec_communicatio_preview-notification-modal.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<div class="modal-header">
+		<h3 class="modal-title">Preview Notification</h3>
+	</div>
+	<div class="modal-body">
+		<preview-notification item="prev.n"></preview-notification>
+		<hr />
+		<h4>This notification will be sent {{prev.sendNow?'Immediately': 'on ' + (prev.n.u_scheduled_time.display_value | date : 'yyyy-MM-dd h:mm a')}} {{!prev.sendNow?'Eastern time':''}}</h4>	
+	</div>
+	
+	<div class="modal-footer">
+		<button class="btn btn-danger btn-sm pull-left" type="button" ng-click="prev.reject()" ng-if="prev.n.sys_id">Reject</button>
+		
+		<button class="btn btn-default btn-sm" type="button" ng-click="prev.cancel()">Close</button>
+		<button class="btn btn-info btn-sm" type="button" ng-click="prev.draft()" ng-show="prev.isShowDraft()">Send Test Email</button>
+		<button class="btn btn-primary btn-sm" type="button" ng-click="prev.showGroup = true" ng-show="prev.isShowVerification()">Submit for Verification</button>
+		<button class="btn btn-primary btn-sm" type="button" ng-click="prev.approve()" ng-show="prev.isShowVerifySend()">Verify and Send</button>
+
+		<hr ng-show="prev.showGroup" />
+		
+		<form class="form-horizontal" ng-if="prev.showGroup">
+			<div class="form-group">
+				<label class="col-sm-5 control-label">Verification Group</label>
+				<div class="col-sm-7">
+					
+					<div class="input-group input-group-sm">
+						<input type="text" class="form-control"
+							   placeholder="Please typeahead search value"
+							   uib-typeahead="group as group.name for group in prev.searchGroup($viewValue)"
+							   typeahead-on-select="prev.setModel($item, $model, $label, $event, 'u_verification_group', 'name')"
+							   typeahead-wait-ms="500"
+							   typeahead-editable="false"
+							   ng-model="prev.n.u_verification_group.display_value" ng-disabled="true"/>
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" ng-click="prev.searchGroupFullList('u_verification_group');" ng-disabled="true"><i class="fa fa-search" aria-hidden="true"></i></button>
+						</span>
+					</div>
+					
+				</div>				
+				
+			</div>
+			<button type="submit" class="btn btn-default btn-sm" ng-click="prev.ok();">Submit</button>
+		</form>
+		
+		
+	</div>
+	
+</j:jelly>]]></html>
+        <name>preview-notification-modal</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-13 10:43:53</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>b4d07e370f52260034457d4ce1050eb1</sys_id>
+        <sys_mod_count>36</sys_mod_count>
+        <sys_name>preview-notification-modal</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_page_b4d07e370f52260034457d4ce1050eb1</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-10-31 10:38:45</sys_updated_on>
+    </sys_ui_page>
+</record_update>

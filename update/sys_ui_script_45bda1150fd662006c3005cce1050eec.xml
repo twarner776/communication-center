@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_wec_communicatio.dashboard-ctrl</name>
+        <script><![CDATA[(function () {
+    'use strict';
+
+    angular
+        .module('twc-product')
+        .controller('NCDashboardCtrl', NCDashboardCtrl);
+
+    NCDashboardCtrl.$inject = ['$scope','$state', '$filter', '$q', 'NgTableParams', 'CommunicatioFactory'];
+
+    function NCDashboardCtrl($scope, $state, $filter, $q, NgTableParams, CommunicatioFactory) {
+        
+		var vm = this;
+		
+		vm.initTable = initTable;
+		vm.getNotificationTypes = getNotificationTypes;
+		vm.getStatus = getStatus;
+		vm.loadPreview = loadPreview;
+		vm.reloadTable = reloadTable;
+		vm.searchUserByName = searchUserByName;
+		vm.removeTab = removeTab;
+		vm.hideChangeFreeze = hideChangeFreeze;
+		vm.getActiveRow = getActiveRow;
+		vm.showField = showField;
+		vm.showArrows = showArrows;
+		vm.search = search;
+		vm.searchLabel = searchLabel;
+		
+		vm.tabs = [
+			{type: 'standart', title:'Recent Communications', disabled: false, active: true, index: 0, table: null, filter: 'u_scheduled_timeBETWEENjavascript:gs.daysAgoStart(2)@javascript:gs.minutesAgoEnd(0)', initSort: {number: "desc"}, rest: 'notificationList'},
+			{type: 'standart', title:'Scheduled Communications', disabled: false, active: false, index: 1, table: null, filter: 'u_scheduled_time>javascript:gs.minutesAgoEnd(0)', initSort: {number: "desc"}, rest: 'notificationList'},
+			{type: 'standart', title:'Historical (All Notifications)', disabled: false, active: false, index: 2, table: null, filter: null, initSort: {number: "desc"}, rest: 'notificationList'},
+			{type: 'standart', title:'Trust Center Posts', disabled: false, active: false, index: 3, table: null, filter: null, initSort: {u_number: "desc"}, rest: 'trustList'},
+		];
+		
+		vm.tabsActive = vm.tabs[0].index;
+		
+		if($state.params.type && $state.params.type == 'thread'){
+			_.remove(vm.tabs, {type: 'thread'});
+			var tabLength = vm.tabs.length;
+			
+			vm.tabs.push({type: 'thread', title:'Show Existing Thread', disabled: false, active: false, index: tabLength, table: null, filter: 'u_parent_child_threading=' + $state.params.threadId, initSort: {number: "asc"}, rest: 'notificationList'});
+			vm.tabsActive = vm.tabs[tabLength].index;
+		}
+
+
+		if($state.params.type && $state.params.type == 'search'){
+			_.remove(vm.tabs, {type: 'search'});
+			
+			vm.modelSearch = $state.params.q;
+			
+			var tabLength = vm.tabs.length, 
+				fields = ['number', 'u_title', 'u_description', 'u_servicenow_ticket', 'u_latest_info', 'u_next_step', 'u_product'], 
+				filterStr = "";
+			
+			if($state.params.q){
+				filterStr = fields.map(function(f){
+					return f + 'LIKE' + vm.modelSearch;
+				}).join('^OR')				
+			}
+
+			if($state.params.tags){
+				vm.showTagInput = true;
+				
+				filterStr += filterStr?"^":"";
+
+				
+				vm.modelSearchTags = JSON.parse($state.params.tags)
+				filterStr += vm.modelSearchTags.map(function(t){
+					return 'u_tagsLIKE' + t.sys_id;
+				}).join('^OR');
+			}
+			
+			vm.tabs.push({type: 'search', title:'Search result', disabled: false, active: false, index: tabLength, table: null, filter: filterStr, initSort: {number: "asc"}, rest: 'notificationList'});
+			vm.tabsActive = vm.tabs[tabLength].index;
+			
+		}
+		
+		function search(){
+			var tags = null;
+			if(vm.modelSearchTags){
+				tags = JSON.stringify(vm.modelSearchTags.map(function(t){
+					return {
+						sys_id: t.sys_id,
+						name: t.name
+					}
+				}));
+			}
+			
+			$state.go('dashboard', {type: 'search', q: vm.modelSearch, tags: tags});
+		}
+		
+		
+		function showField(){
+			return !vm.preview && vm.tabs[vm.tabsActive].rest === 'notificationList';
+		}
+		
+		function getActiveRow(){
+			
+			return vm.tabs[vm.tabsActive];
+		}
+		
+		function showArrows(row){
+			if(row.u_parent && row.u_parent.value === 'false' && vm.tabs[vm.tabsActive].type === 'thread'){
+				return true;
+			}
+			
+			return false;
+		}
+		
+		function hideChangeFreeze(row){
+			CommunicatioFactory.update({id: row.sys_id.value}, {u_change_display: false}).$promise.then(function(res){
+				vm.tabs[vm.tabsActive].table.reload();
+			});
+			
+		}
+		
+		function removeTab(index){
+			vm.tabs.splice(index, 1);
+			vm.tabsActive = vm.tabs[0].index;
+			$state.go('dashboard', {type: null, threadId: null, q: null, tags: null});
+		}
+
+		function initTable(tab){
+			if(tab.table){
+				return true;
+			}
+			tab.table = new NgTableParams({
+				count: 25,
+				sorting: tab.initSort, 
+			}, {
+				counts: [25, 50, 100, 200],
+				getData: function(params) {
+					
+					var filtersArr = [];
+
+					var sorting = Object.keys(params.sorting());
+					if(sorting.length > 0){
+						filtersArr.push('ORDERBY' + (params.sorting()[sorting[0]] === 'desc' ? 'DESC' : '') + sorting[0]);
+					}
+					
+					_.forOwn(params.filter(), function(value, key) {
+						filtersArr.push(key + 'LIKE' + value);
+					});
+					
+					if(tab.filter){
+						filtersArr.push(tab.filter);
+					}
+					
+					return CommunicatioFactory[tab.rest]({
+						sysparm_limit: params.count(),
+						sysparm_offset: (params.page() - 1) * params.count(),
+						sysparm_query: filtersArr.join('^'),
+						sysparm_display_value: 'all',
+						preloader: false
+					}).$promise.then(function(res) {
+						params.total(res.headers['x-total-count']);
+						return res.data.result;
+					});
+				}
+			});
+			
+			
+		}
+		
+		function getNotificationTypes(){
+			return CommunicatioFactory.notificationTypes().$promise.then(function(res){
+				return res.result.map(function(item){
+					return { id: item.value, title: item.label};
+				})
+			});
+		}
+
+		function getStatus(){
+			return CommunicatioFactory.status().$promise.then(function(res){
+				return res.result.map(function(item){
+					return { id: item.value, title: item.label};
+				})
+			});
+		}
+
+
+        function searchUserByName(name){
+            return CommunicatioFactory.userList({sysparm_query: 'nameLIKE' + name + '^' + 'ORemailLIKE' + name + '^active=true^sys_class_name=sys_user', sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+        }
+		
+		
+		function loadPreview(row){
+			vm.preview = row;
+		}
+        
+		function reloadTable(model, key){
+			var tbl = vm.tabs[vm.tabsActive].table;
+			if(!model){
+				var filter = {};
+				filter[key] = "";
+				angular.extend(tbl.filter(), filter);				
+			}
+        }
+		
+        function searchLabel(name){
+            return CommunicatioFactory.label({sysparm_query: 'nameLIKE' + name + '^type=Communication Center', sysparm_limit: 30, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+        }		
+		
+    }
+
+})();
+
+]]></script>
+        <script_name>dashboard-ctrl</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-05 11:25:40</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>45bda1150fd662006c3005cce1050eec</sys_id>
+        <sys_mod_count>75</sys_mod_count>
+        <sys_name>x_wec_communicatio.dashboard-ctrl</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_script_45bda1150fd662006c3005cce1050eec</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-09 08:59:00</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

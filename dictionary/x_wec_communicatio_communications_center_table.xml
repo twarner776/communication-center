@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Communications Center Table" max_length="40" name="x_wec_communicatio_communications_center_table" type="collection">
+        <element default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element label="sent" max_length="40" name="sent" type="glide_date_time"/>
+        <element default="javascript:current.getTableName();" dynamic_default_value="b5cb83a85f220100a9ad2572f2b4773c" label="Class" max_length="80" name="sys_class_name" type="sys_class_name" use_dynamic_default="true"/>
+        <element label="Actual Maintenance End Time" max_length="40" name="u_actual_maintenance_end_time" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Bridge Status" max_length="40" name="u_bridge_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="True" label="Change Display in UI" max_length="40" name="u_change_display" type="string">
+            <choice>
+                <element label="True" sequence="0" value="True"/>
+                <element label="False" sequence="1" value="False"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Current Status" max_length="40" name="u_current_status" type="string">
+            <choice>
+                <element label="Initial" sequence="0" value="Initial"/>
+                <element label="On Going" sequence="1" value="On Going"/>
+                <element label="Resolved" sequence="2" value="Resolved"/>
+                <element label="Reminder" sequence="3" value="Reminder"/>
+                <element label="Completed" sequence="4" value="Completed"/>
+            </choice>
+        </element>
+        <element label="Date Sent" max_length="40" name="u_date_sent" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="Description" max_length="400" name="u_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="External Email Address" max_length="40" name="u_external_email" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Impact" max_length="400" name="u_impact" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Incident History" max_length="400" name="u_incident_history" type="string"/>
+        <element label="Incident Owner" max_length="32" name="u_incident_owner" reference="sys_user_group" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Incident Source" max_length="40" name="u_incident_source" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Incident Start" max_length="40" name="u_incident_start" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Incident Ticket Priority" max_length="40" name="u_incident_ticket_priority" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Latest Info" max_length="400" name="u_latest_info" type="string"/>
+        <element label="Location" max_length="80" name="u_location" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Maintenance History" max_length="400" name="u_maintenance_history" type="string"/>
+        <element label="Maintenance POC" max_length="32" name="u_maintenance_poc" reference="sys_user" type="reference"/>
+        <element label="Maintenance Projected End Time" max_length="40" name="u_maintenance_projected_end_time" type="glide_date_time"/>
+        <element label="Maintenance Start Time" max_length="40" name="u_maintenance_start_time" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="MTTR" max_length="40" name="u_mttr" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Next Step" max_length="400" name="u_next_step" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Notification Type" max_length="40" name="u_notification_type" type="string">
+            <choice>
+                <element label="Incident" sequence="0" value="Incident"/>
+                <element label="Maintenance" sequence="1" value="Maintenance"/>
+                <element label="Informational" sequence="2" value="Informational"/>
+                <element label="Security (Phishing)" sequence="3" value="Security (Phishing)"/>
+                <element label="External Premium Support" sequence="4" value="External Premium Support"/>
+                <element label="Business Continuity" sequence="5" value="Business Continuity"/>
+                <element label="Change Freeze" sequence="6" value="Change Freeze"/>
+                <element label="General" sequence="7" value="General"/>
+                <element label="Trust Site" sequence="8" value="Trust Site"/>
+            </choice>
+        </element>
+        <element label="Overriding Comm #" max_length="32" name="u_overriding_comm" reference="x_wec_communicatio_communications_center_table" type="reference"/>
+        <element label="Parent" max_length="40" name="u_parent" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Parent / Child Threading" max_length="40" name="u_parent_child_threading" type="string"/>
+        <element label="Product" max_length="32" name="u_product" reference="cmdb_ci" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Public Slack Channel" max_length="100" name="u_public_slack_channel" type="string"/>
+        <element label="Record" max_length="32" name="u_record" reference="task" type="reference"/>
+        <element label="Reminder" max_length="40" name="u_reminder" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Reminder Time" max_length="40" name="u_reminder_time" type="string">
+            <choice>
+                <element label="10 min" sequence="0" value="10 min"/>
+                <element label="15 min" sequence="1" value="15 min"/>
+                <element label="30 min" sequence="2" value="30 min"/>
+                <element label="45 min" sequence="3" value="45 min"/>
+                <element label="1 Hour" sequence="4" value="1 Hour"/>
+                <element label="1 Day" sequence="5" value="1 Day"/>
+                <element label="2 Days" sequence="6" value="2 Days"/>
+                <element label="1 Week" sequence="7" value="1 Week"/>
+            </choice>
+        </element>
+        <element label="Resend" max_length="40" name="u_resend" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Resolution Time" max_length="40" name="u_resolution_time" type="string"/>
+        <element label="RFC #" max_length="32" name="u_rfc" reference="change_request" type="reference"/>
+        <element label="Scheduled Date/Time to Send" max_length="40" name="u_scheduled_time" type="glide_date_time"/>
+        <element attributes="no_sort=true,slushbucket_ref_no_expand=true" label="Groups" max_length="1024" name="u_send_to_groups" reference="sys_user_group" type="glide_list"/>
+        <element attributes="no_sort=true,slushbucket_ref_no_expand=true" label="Users" max_length="1024" name="u_send_to_users" reference="sys_user" type="glide_list"/>
+        <element label="Sent" max_length="40" name="u_sent" type="glide_date_time"/>
+        <element label="ServiceNow Ticket" max_length="32" name="u_servicenow_ticket" reference="incident" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Slack Channel" max_length="40" name="u_slack_channel" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Slack Description" max_length="400" name="u_slack_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Slack Incident Ticket" max_length="40" name="u_slack_incident_ticket" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Slack Priority" max_length="40" name="u_slack_priority" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Slack TItle" max_length="40" name="u_slack_title" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="SMS Description" max_length="400" name="u_sms_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="SMS Incident Ticket" max_length="40" name="u_sms_incident_ticket" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="SMS Priority" max_length="40" name="u_sms_priority" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="SMS Title" max_length="40" name="u_sms_title" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Status" max_length="40" name="u_status" type="string">
+            <choice>
+                <element label="Verified" sequence="0" value="Verified"/>
+                <element label="Sent" sequence="1" value="Sent"/>
+                <element label="Cancelled" sequence="2" value="Cancelled"/>
+                <element label="Pending Verification" sequence="3" value="Pending Verification"/>
+                <element label="Draft" sequence="4" value="Draft"/>
+            </choice>
+        </element>
+        <element attributes="no_sort=true,slushbucket_ref_no_expand=true" label="Tags" max_length="1024" name="u_tags" reference="label" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" label="Text Field 1" max_length="400" name="u_text_field_1" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Text Field 2" max_length="400" name="u_text_field_2" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Text Field 3" max_length="400" name="u_text_field_3" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Text Field 4" max_length="400" name="u_text_field_4" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Text Field 5" max_length="400" name="u_text_field_5" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Text Field 6" max_length="400" name="u_text_field_6" type="string"/>
+        <element label="Time Sent" max_length="40" name="u_time_sent" type="glide_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Title" max_length="40" name="u_title" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Trust Site Status" max_length="40" name="u_trust_site_status" type="string">
+            <choice>
+                <element label="No Issues" sequence="0" value="No Issues"/>
+                <element label="Service Disruption" sequence="1" value="Service Disruption"/>
+                <element label="Service Outage" sequence="2" value="Service Outage"/>
+            </choice>
+        </element>
+        <element label="Verification Group" max_length="32" name="u_verification_group" reference="sys_user_group" type="reference"/>
+        <element label="Verified" max_length="40" name="u_verified" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Verified by" max_length="40" name="u_verified_by" type="string"/>
+        <index name="index">
+            <element name="u_incident_owner"/>
+        </index>
+        <index name="index2">
+            <element name="u_product"/>
+        </index>
+        <index name="index3">
+            <element name="u_verification_group"/>
+        </index>
+        <index name="index4">
+            <element name="u_record"/>
+        </index>
+        <index name="index5">
+            <element name="u_maintenance_poc"/>
+        </index>
+        <index name="index6">
+            <element name="u_servicenow_ticket"/>
+        </index>
+        <index name="index7">
+            <element name="u_rfc"/>
+        </index>
+        <index name="index8">
+            <element name="u_location"/>
+        </index>
+        <index name="index9">
+            <element name="u_overriding_comm"/>
+        </index>
+    </element>
+</database>

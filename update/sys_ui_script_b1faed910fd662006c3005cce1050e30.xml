@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_wec_communicatio.init</name>
+        <script><![CDATA[document.writeln('<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />');
+document.writeln('<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-block-ui/0.2.2/angular-block-ui.min.css" rel="stylesheet" />');
+document.writeln('<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" />');
+document.writeln('<link href="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.css" rel="stylesheet"></link>');
+document.writeln('<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.0.0/angular-toastr.min.css" rel="stylesheet"></link>');
+document.writeln('<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.19.4/select.min.css" rel="stylesheet"></link>');
+document.writeln('<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.19.4/select.min.css" rel="stylesheet"></link>');
+document.writeln('<link href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.css" rel="stylesheet"></link>');
+document.writeln('<link href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.bootstrap.min.css" rel="stylesheet"></link>');
+
+
+document.writeln('<link href="82cefbe40fec62006c3005cce1050ef3.cssdbx" rel="stylesheet" type="text/css"></link>');
+
+
+document.writeln('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>');
+document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js"></script>');
+document.writeln('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>');
+document.writeln('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js"></script>');
+document.writeln('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>');
+document.writeln('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.min.js"></script>');
+
+document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-block-ui/0.2.2/angular-block-ui.min.js"></script>');
+document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls.js"></script>');
+document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>');
+document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.js"></script>');
+document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.19.4/select.js"></script>');
+document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.js"></script>');
+
+
+document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.0.0/angular-toastr.tpls.min.js"></script>');
+
+document.writeln('<script src="x_wec_communicatio.app.jsdbx"></script>');
+
+document.writeln('<script src="x_wec_product.UserFactory.jsdbx"></script>');
+document.writeln('<script src="x_wec_product.ReferenceBookFactory.jsdbx"></script>');
+document.writeln('<script src="x_wec_product.GroupsService.jsdbx"></script>');
+document.writeln('<script src="x_wec_communicatio.CommunicatioFactory.jsdbx"></script>');
+document.writeln('<script src="x_wec_communicatio.SearchServiceHelper.jsdbx"></script>');
+document.writeln('<script src="x_wec_communicatio.FieldByTypeFactory.jsdbx"></script>');
+
+document.writeln('<script src="x_wec_product.navbar-directive.jsdbx"></script>');
+document.writeln('<script src="x_wec_communicatio.PreviewNotification-d.jsdbx"></script>');
+
+document.writeln('<script src="x_wec_communicatio.dashboard-ctrl.jsdbx"></script>');
+document.writeln('<script src="x_wec_communicatio.notification-ctrl.jsdbx"></script>');
+]]></script>
+        <script_name>init</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-05 11:15:23</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>b1faed910fd662006c3005cce1050e30</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>x_wec_communicatio.init</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_script_b1faed910fd662006c3005cce1050e30</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-07 10:42:58</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

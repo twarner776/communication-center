@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sysevent_email_template">
+    <sysevent_email_template action="INSERT_OR_UPDATE">
+        <collection>x_wec_communicatio_communications_center_table</collection>
+        <message/>
+        <message_html><![CDATA[<p style="font-size: 11px;"><strong><span style="font-size: 24px; color: #000000;">${u_title}</span></strong>&nbsp;<br /><br /></p>
+<p class="p1" style="font-size: 12.8px;"><font size="2"><strong style="font-family: verdana, geneva; font-size: small;"><strong style="font-family: verdana, geneva; font-size: small;">Current Status:</strong></strong><span style="font-size: 11px;"> ${u_current_status}</span></font></p>
+<p style="font-size: 11px;"><font size="2"><strong style="font-family: verdana, geneva; font-size: small;">Description:</strong> ${u_description}</font></p>
+<p style="font-size: 11px;"><font size="2"><strong style="font-family: verdana, geneva; font-size: small;">Next Step:</strong> ${u_next_step}</font></p>
+<p style="font-size: 11px;"><font size="2"><strong style="font-size: small;">Latest Info:</strong> ${u_latest_info}</font></p>
+<p style="font-size: 11px;"><font size="2"><strong style="font-family: verdana, geneva; font-size: small;">Location:</strong> ${u_location}<strong style="font-family: verdana, geneva; font-size: small;"><br /></strong></font></p>
+<p style="font-size: 11px;"><font size="2"><strong>Maintenance Start Time:</strong> ${u_maintenance_start_time}</font></p>
+<p style="font-size: 11px;"><font size="2"><strong>Maintenance Projected End Time:</strong> ${u_maintenance_projected_end_time}</font></p>
+<p style="font-size: 11px;"><font size="2"><strong>Maintenance Actual End Time:</strong> ${u_actual_maintenance_end_time}</font></p>
+<p style="font-size: 11px;">&nbsp;</p>]]></message_html>
+        <message_list/>
+        <message_text/>
+        <name>TWC Core - CC - Change  Freeze</name>
+        <sms_alternate/>
+        <subject>${u_title}</subject>
+        <sys_class_name>sysevent_email_template</sys_class_name>
+        <sys_created_by>Courtney.Richards@weather.com</sys_created_by>
+        <sys_created_on>2016-10-18 15:21:26</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>5690e1e10feee60034457d4ce1050e26</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>TWC Core - CC - Change  Freeze</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sysevent_email_template_5690e1e10feee60034457d4ce1050e26</sys_update_name>
+        <sys_updated_by>Courtney.Richards@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-01 18:10:47</sys_updated_on>
+        <sys_version>2</sys_version>
+    </sysevent_email_template>
+</record_update>

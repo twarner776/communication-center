@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_wec_communicatio.CommunicatioFactory</name>
+        <script><![CDATA[(function () {
+    'use strict';
+
+    angular
+        .module('twc-product')
+        .factory('CommunicatioFactory', CommunicatioFactory);
+
+    CommunicatioFactory.$inject = ['$resource'];
+
+    function CommunicatioFactory($resource) {
+		return $resource('', {}, {
+			create: {method: 'POST', url: '/api/now/table/x_wec_communicatio_communications_center_table'},
+			update: {method: 'PATCH', url: '/api/now/table/x_wec_communicatio_communications_center_table/:id'},
+			get: {method: 'GET', url: '/api/now/table/x_wec_communicatio_communications_center_table/:id'},
+			list: {method: 'GET', url: '/api/now/table/x_wec_communicatio_communications_center_table'},
+			
+			uniq: {method: 'GET', url: '/api/x_wec_communicatio/communications_api/uniq'},
+			
+			label: {method: 'GET', url: '/api/x_wec_product/table/label'},
+			createLabel: {method: 'POST', url: '/api/x_wec_product/table/label'},
+			
+			groupMemberSearch: {method: 'GET', url: '/api/x_wec_product/table/sys_user_grmember'},
+			
+			notificationTypes: {method: 'GET', url: '/api/x_wec_product/table/x_wec_communicatio_communications_center_table/choice/u_notification_type'},
+			currentStatus: {method: 'GET', url: '/api/x_wec_product/table/x_wec_communicatio_communications_center_table/choice/u_current_status'},
+			status: {method: 'GET', url: '/api/x_wec_product/table/x_wec_communicatio_communications_center_table/choice/u_status'},
+			reminderTime: {method: 'GET', url: '/api/x_wec_product/table/x_wec_communicatio_communications_center_table/choice/u_reminder_time'},
+			
+			trustStatus: {method: 'GET', url: '/api/x_wec_product/table/u_trust/choice/u_status'},
+
+			taskList: {method: 'GET', url: '/api/x_wec_product/table/task'},
+			taskFullList: {
+				method: 'GET', 
+				url: '/api/x_wec_product/table/task',
+				transformResponse: function(data, headers){
+					var response = {}
+					response.data = angular.fromJson(data);
+					response.headers = headers();
+					return response;
+				}
+			},			
+			
+			locationList: {method: 'GET', url: '/api/x_wec_product/table/cmn_location'},
+			locationFullList: {
+				method: 'GET', 
+				url: '/api/x_wec_product/table/cmn_location',
+				transformResponse: function(data, headers){
+					var response = {}
+					response.data = angular.fromJson(data);
+					response.headers = headers();
+					return response;
+				}
+			},
+
+			productList: {method: 'GET', url: '/api/x_wec_product/table/x_wec_product_table'},
+			productFullList: {
+				method: 'GET', 
+				url: '/api/x_wec_product/table/x_wec_product_table',
+				transformResponse: function(data, headers){
+					var response = {}
+					response.data = angular.fromJson(data);
+					response.headers = headers();
+					return response;
+				}
+			},
+
+			incident: {method: 'GET', url: '/api/x_wec_product/table/incident/:id'},
+			incidentList: {method: 'GET', url: '/api/x_wec_product/table/incident'},
+			incidentFullList: {
+				method: 'GET', 
+				url: '/api/x_wec_product/table/incident',
+				transformResponse: function(data, headers){
+					var response = {}
+					response.data = angular.fromJson(data);
+					response.headers = headers();
+					return response;
+				}
+			},
+
+			changeRequestList: {method: 'GET', url: '/api/x_wec_product/table/change_request'},
+			changeRequestFullList: {
+				method: 'GET', 
+				url: '/api/x_wec_product/table/change_request',
+				transformResponse: function(data, headers){
+					var response = {}
+					response.data = angular.fromJson(data);
+					response.headers = headers();
+					return response;
+				}
+			},
+			
+			userList: {method: 'GET', url: '/api/x_wec_product/table/sys_user'},
+			userFullList: {
+				method: 'GET', 
+				url: '/api/x_wec_product/table/sys_user',
+				transformResponse: function(data, headers){
+					var response = {}
+					response.data = angular.fromJson(data);
+					response.headers = headers();
+					return response;
+				}
+			},
+
+			groupList: {method: 'GET', url: '/api/x_wec_product/table/sys_user_group'},
+			groupFullList: {
+				method: 'GET', 
+				url: '/api/x_wec_product/table/sys_user_group',
+				transformResponse: function(data, headers){
+					var response = {}
+					response.data = angular.fromJson(data);
+					response.headers = headers();
+					return response;
+				}
+			},
+			
+			
+			notificationList: {
+				method: 'GET', 
+				url: '/api/x_wec_product/table/x_wec_communicatio_communications_center_table',
+				transformResponse: function(data, headers){
+					var response = {}
+					response.data = angular.fromJson(data);
+					response.headers = headers();
+					return response;
+				}
+			},
+			
+			trustList: {
+				method: 'GET', 
+				url: '/api/x_wec_product/table/u_trust',
+				transformResponse: function(data, headers){
+					var response = {}
+					response.data = angular.fromJson(data);
+					response.headers = headers();
+					return response;
+				}
+			},
+			
+			getCurrentTime: {method: 'GET', url: '/api/x_wec_product/table/current_date'},
+			getGroupTypes: {method: 'GET', url: '/api/x_wec_product/table/sys_user_group_type'},
+		})
+
+    }
+
+})();
+]]></script>
+        <script_name>CommunicatioFactory</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-06 09:55:49</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>dd6226690fde62006c3005cce1050e43</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>x_wec_communicatio.CommunicatioFactory</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_script_dd6226690fde62006c3005cce1050e43</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-08 11:12:35</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_filter">
+    <sys_filter action="INSERT_OR_UPDATE">
+        <filter table="sys_user">nameSTARTSWITHscott b^nameISNOTEMPTY^EQ<item endquery="false" field="name" goto="false" newquery="false" operator="STARTSWITH" or="false" value="scott b"/>
+            <item endquery="false" field="name" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter>
+        <group/>
+        <last_used>2016-10-21 13:42:43</last_used>
+        <mobile>true</mobile>
+        <roles/>
+        <sys_class_name>sys_filter</sys_class_name>
+        <sys_created_by>kirk.plunkett@weather.com</sys_created_by>
+        <sys_created_on>2016-10-21 13:42:43</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_id>a5c6a0a20fa2aa0034457d4ce1050e59</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>mobile</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_filter_a5c6a0a20fa2aa0034457d4ce1050e59</sys_update_name>
+        <sys_updated_by>kirk.plunkett@weather.com</sys_updated_by>
+        <sys_updated_on>2016-10-21 13:42:43</sys_updated_on>
+        <table>sys_user</table>
+        <title>mobile</title>
+        <user display_value="Kirk Plunkett">8f339c460fd721006aa57d4ce1050ee7</user>
+    </sys_filter>
+</record_update>

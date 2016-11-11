@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_wec_communicatio.notification-ctrl</name>
+        <script><![CDATA[(function () {
+    'use strict';
+
+    angular
+        .module('twc-product')
+        .controller('NCNotificationCtrl', NCNotificationCtrl);
+
+    NCNotificationCtrl.$inject = ['$scope','$state', '$stateParams', '$filter', '$q', '$http', '$uibModal', 'NgTableParams', 'CommunicatioFactory', 'notificationTypes', 'currentStatus', 'reminderTime', 'SearchServiceHelper', 'currentTime', 'groupsTypes', 'FieldByTypeFactory', 'userService', 'trustStatus'];
+
+    function NCNotificationCtrl($scope, $state, $stateParams, $filter, $q, $http, $uibModal, NgTableParams, CommunicatioFactory, notificationTypes, currentStatus, reminderTime, SearchServiceHelper, currentTime, groupsTypes, FieldByTypeFactory, userService, trustStatus) {
+        
+		var vm = this;
+		vm.state = $state;
+		vm.isInvalid = isInvalid;
+		vm.isValid = isValid;
+		vm.setModel = setModel;
+		vm.notificationTypes = notificationTypes.result;
+		vm.currentStatus = currentStatus.result;
+		vm.trustStatus = trustStatus.result;
+		vm.reminderTime = reminderTime.result;
+		vm.searchLocation = searchLocation;
+		vm.searchLocationFullList = searchLocationFullList;
+		vm.searchProduct = searchProduct;
+		vm.searchProductFullList = searchProductFullList;
+		vm.searchIncident = searchIncident;
+		vm.searchIncidentFullList = searchIncidentFullList;
+		vm.searchChangeRequest = searchChangeRequest;
+		vm.searchChangeRequestFullList = searchChangeRequestFullList;
+		vm.searchUser = searchUser;
+		vm.searchUser2Select = searchUser2Select;
+		vm.searchUserFullList = searchUserFullList;
+		vm.removeUserCollection = removeUserCollection;
+		vm.searchGroup = searchGroup;
+		vm.searchGroup2Select = searchGroup2Select;
+		vm.searchGroupFullList = searchGroupFullList;
+		vm.removeGroupCollection = removeGroupCollection;
+		
+		vm.searchRecord = searchRecord;
+		vm.searchRecordFullList = searchRecordFullList;
+		
+		vm.searchLabel = searchLabel;
+		vm.upsert = upsert;
+		vm.preview = preview;
+		vm.showFields = {};
+		
+		vm.isOwner = null;
+		vm.isEdit = true; 
+		
+		vm.addUser = addUser;
+		vm.removeUser = removeUser;
+		vm.addGroup = addGroup;
+		vm.removeGroup = removeGroup;
+		
+		vm.onTagAdded = onTagAdded;
+		
+		vm.now = new Date(currentTime.result.dateDisplay);
+		
+		if($state.params && $state.params.id){
+			loadNotification($state.params.id);
+		}else{
+			
+			CommunicatioFactory.uniq().$promise.then(function(res){
+				initModel(res.result.uniq);
+			});
+			
+		}
+		
+		$scope.$watch('vm.model.u_notification_type', function (value) {
+		  if (typeof value !== 'undefined' && value.value) {
+			  
+			  showFieldsByType();
+
+			  if(!$state.params.type){
+
+				  clearModel();
+				  preloadFieldsValue();
+				  
+			  }
+			  
+		  } 
+		}, true);			
+
+		$scope.$watch('vm.model.u_servicenow_ticket', function (value) {
+		  if (value != null && value.value) {
+			  CommunicatioFactory.incident({id: value.value, sysparm_display_value: 'all'}).$promise.then(function(res){
+				  
+				  vm.model['u_product'] = res.result.cmdb_ci;
+				  vm.model['u_incident_ticket_priority'] = {
+					  display_value: res.result.priority.display_value,
+					  value: res.result.priority.display_value
+				  }
+				  vm.model['u_bridge_status'] = res.result.u_conf_bridge;
+				  vm.model['u_incident_owner'] = res.result.assignment_group;
+				  vm.model['u_slack_channel'] = res.result.u_slack_channel;
+				  
+				  vm.model['u_sms_incident_ticket'] = {
+					  display_value: res.result.number.display_value,
+					  value: res.result.number.display_value
+				  }
+
+				  vm.model['u_slack_incident_ticket'] = {
+					  display_value: res.result.number.display_value,
+					  value: res.result.number.display_value
+				  }
+				  
+				if(!vm.model.sys_id){
+					vm.model['u_latest_info'] = res.result.work_notes;
+				}
+				  
+			  });			  
+		  } 
+		});
+		
+		$scope.$watch('vm.changeFreezeDependent', function (value) {
+
+			if (typeof value !== 'undefined' && value !== null) {
+				if(value){
+
+					CommunicatioFactory.list({sysparm_query: 'u_notification_type=Change Freeze^u_status=Sent^u_maintenance_projected_end_time>=javascript:gs.minutesAgoStart(0)^u_change_display=True'}).$promise.then(function(res){
+						vm.changeFreeze = res.result;
+					});
+					
+				}else{
+				
+					vm.model['u_overriding_comm'] = {
+						value: "",
+						display_value: ""
+					};
+					
+				}
+				
+					
+				
+			}
+			
+		});
+		
+		function initModel(uniq){
+			vm.model = {};
+			
+			vm.model['u_parent_child_threading'] = {
+				value: uniq
+			}
+
+			vm.model['u_parent'] = {
+				value: true
+			}
+			
+			if($state.params.n_type){
+				vm.model['u_notification_type'] = {
+					value: $state.params.n_type
+				}
+				
+			}else{
+				vm.model['u_notification_type'] = {
+					value: vm.notificationTypes[0].value
+				}
+				
+			}
+			
+			vm.model['u_scheduled_time'] = {
+				display_value: vm.now
+			}
+
+			vm.model['u_status'] = {
+				value: 'Draft'
+			}
+			
+			vm.userCollection = [];
+			vm.groupCollection = [];
+			vm.tags = [];
+		}
+		
+		function showFieldsByType(){
+			vm.showFields = {};
+			FieldByTypeFactory[vm.model.u_notification_type.value].forEach(function(f){
+				vm.showFields[f] = true;
+			});
+			
+		}
+
+		function clearModel(){
+			FieldByTypeFactory[vm.model.u_notification_type.value].forEach(function(f){
+				vm.model[f] = {};
+			});
+			
+			
+			vm.model['u_scheduled_time'] = {
+				display_value: vm.now
+			}
+
+			vm.model['u_status'] = {
+				value: 'Draft'
+			}
+			
+			vm.userCollection = [];
+			vm.groupCollection = [];
+			vm.tags = [];
+			
+		}
+		
+		function preloadFieldsValue(){
+			switch (vm.model.u_notification_type.value) {
+			  case 'Security (Phishing)':
+				
+					$http.get('/x_wec_communicatio_comm_security_description.do').then(function(res){
+
+						vm.model['u_description'] = {
+							display_value: res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gm, " "),
+							value: res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gm, " ")
+						}
+						
+					});
+				
+				break;
+
+			  case 'External Premium Support':
+					
+					$http.get('/x_wec_communicatio_comm_external_support_description.do').then(function(res){
+
+						vm.model['u_description'] = {
+							display_value: res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gm, " "),
+							value: res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gm, " ")
+						}
+						
+					});
+					
+				break;
+			}			
+		}
+		
+		function loadNotification(id){
+
+			CommunicatioFactory.get({id: id, sysparm_display_value: 'all'}).$promise.then(function(res){
+				
+				['u_maintenance_start_time', 'u_maintenance_projected_end_time', 'u_actual_maintenance_end_time'].forEach(function(t){
+					if(res.result[t] && res.result[t].display_value){
+						res.result[t].display_value = new Date(res.result[t].display_value); 
+					}
+				});
+				
+				
+				vm.model = res.result;
+				
+				vm.userCollection = fillUserGroup(vm.model.u_send_to_users);
+				vm.groupCollection = fillUserGroup(vm.model.u_send_to_groups);
+				vm.tags = fillTags(vm.model.u_tags)
+				
+				if($state.params.type){
+					delete vm.model.sys_id;
+					delete vm.model.number;
+					
+					delete vm.model.u_verified_by;
+					delete vm.model.u_verified;
+					
+					vm.model['u_status'] = {
+						value: 'Pending Verification'
+					}
+					vm.model['u_parent'] = {
+						value: false
+					}
+					
+					if($state.params.type == 'resend'){
+						delete vm.model.u_parent_child_threading;
+					}
+				}
+				
+				vm.isOwner = userService.email === vm.model.sys_created_by.value;
+				if(vm.model.u_status.value == 'Sent' || vm.model.u_status.value == 'Cancelled' || vm.model.u_status.value == 'Verified'){
+					vm.isEdit = false; 
+				}
+				
+				if(vm.model['u_overriding_comm'] && vm.model['u_overriding_comm'].value){
+					vm.changeFreezeDependent = true;
+				}
+            });			
+			
+		}
+		
+		function fillUserGroup(model){
+			var collection  = [];
+			if(model && model.value){
+				var d = model.display_value.split(','),
+					v = model.value.split(',');
+				
+				v.forEach(function(item, index){
+					collection.push({
+						display_value: d[index],
+						value: item
+					})
+				});
+				
+			}
+			return collection;
+		}
+
+		function fillTags(model){
+			var collection  = [];
+			if(model && model.value){
+				var d = model.display_value.split(','),
+					v = model.value.split(',');
+				
+				v.forEach(function(item, index){
+					collection.push({
+						name: d[index],
+						sys_id: item
+					})
+				});
+				
+			}
+			return collection;
+		}
+		
+		function upsert(status){
+			var model = {},
+			method = (vm.model.sys_id && vm.model.sys_id.value) ? 'update' : 'create';
+			
+			_.forOwn(vm.model, function(value, key) {
+				if(key == 'u_scheduled_time' || key == 'u_maintenance_start_time' || key == 'u_maintenance_projected_end_time' || key == 'u_actual_maintenance_end_time'){
+					model[key] = value.display_value;
+				}else{
+					model[key] = value.value;
+				}
+				 
+			});
+			
+			model['u_send_to_users'] = vm.userCollection.map(function(i){return i.value}).join(',');
+			model['u_send_to_groups'] = vm.groupCollection.map(function(i){return i.value}).join(',');
+			
+			if(vm.sendNow){
+				model.u_scheduled_time = formatTime(vm.now);
+			}else{
+				model.u_scheduled_time = formatTime(model.u_scheduled_time);
+			}
+			
+			if(status){
+				model.u_status = status;
+				if(status === 'Verified'){
+					model.u_verified = formatTime(vm.now);
+					model.u_verified_by = userService.email;
+					
+					if(model.u_notification_type === 'Change Freeze'){
+						model.u_change_display = 'true';
+						if(model.u_overriding_comm){
+							CommunicatioFactory.update({id: model.u_overriding_comm}, {u_change_display: 'false'}).$promise;
+						}
+					}
+					
+				}
+			}
+			
+			['u_maintenance_start_time', 'u_maintenance_projected_end_time', 'u_actual_maintenance_end_time'].forEach(function(t){
+				if(model[t]){
+					model[t] = formatTime(model[t]); 
+				}
+			});
+
+			if(vm.tags.length > 0){
+
+				var updateTags = vm.tags.filter(function(item){
+					if(item.hasOwnProperty('sys_id')){
+						return true;
+					}
+
+					return false;
+				}).map(function(item){return item.sys_id});
+
+				model.u_tags = updateTags.join(',');
+
+			}
+			
+			
+			CommunicatioFactory[method]({id: (vm.model.sys_id && vm.model.sys_id.value) ? vm.model.sys_id.value : null}, model).$promise.then(function(res){
+				$state.go('dashboard');
+			});
+			
+		}
+		
+		function formatTime(time){
+			return $filter('date')(new Date(new Date(time).getTime() + (currentTime.result.offset * -1)), 'yyyy-MM-dd HH:mm');
+		} 
+		
+		function preview(){
+			
+			var modalInstance = $uibModal.open({
+					
+				templateUrl: '/x_wec_communicatio_preview-notification-modal.do',
+				size: 'lg',
+				resolve:{
+					tocGroup: function (CommunicatioFactory){
+						return CommunicatioFactory.groupList({sysparm_query: 'name=TOC'}).$promise.then(function(res){return res.result;});
+					},
+
+					isUserHasGroup: function (CommunicatioFactory){
+						if(vm.model.u_verification_group && vm.model.u_verification_group.value){
+							return CommunicatioFactory.groupMemberSearch({sysparm_query: 'user=' + userService.sys_id + '^group=' + vm.model.u_verification_group.value}).$promise.then(function(res){
+								return res.result.length > 0;
+							});
+						}else{
+							return false;
+						}
+					},
+					
+				},
+				
+				controller: function ($scope, $uibModalInstance, tocGroup, isUserHasGroup) {
+					var prev = this;
+
+					prev.n = vm.model;
+					prev.sendNow = vm.sendNow;
+					prev.ok = ok;
+					prev.reject = reject;
+					prev.cancel = cancel;
+					prev.approve = approve;
+					prev.draft = draft;
+					prev.isOwner = vm.isOwner;
+					prev.isShowDraft = isShowDraft;
+					prev.isShowVerifySend = isShowVerifySend;
+					prev.isShowVerification = isShowVerification;
+					prev.searchGroup = searchGroup;
+					prev.searchGroupFullList = searchGroupFullList;
+					prev.setModel = setModel;
+
+					if(!prev.n.u_verification_group){
+
+						prev.n['u_verification_group'] = {
+							display_value: tocGroup[0].name,
+							value: tocGroup[0].sys_id
+						}
+						
+					}
+					
+					function ok () {
+						upsert('Pending Verification');
+						$uibModalInstance.close();
+					}
+
+					function reject () {
+						upsert('Cancelled');
+						$uibModalInstance.close();
+					}
+
+					function approve () {
+						upsert('Verified');
+						$uibModalInstance.close();
+					}
+					
+					function draft () {
+						upsert('Draft');
+						$uibModalInstance.close();
+					}
+					
+					function cancel () {
+						$uibModalInstance.close();
+					}
+
+					function isShowDraft() {
+						if(!prev.n.sys_id){
+							return true;
+						}
+						
+						if(prev.isOwner && prev.n.u_status && prev.n.u_status.value === 'Draft'){
+							return true;
+						}
+						return false;
+					}
+					
+					function isShowVerifySend() {
+						if(prev.n.u_status && prev.n.u_status.value === 'Draft'){
+							return false;
+						}
+
+						if(prev.n.sys_id && !prev.isOwner && isUserHasGroup){
+							return true;
+						}
+						
+						return false;
+					}	
+					
+					function isShowVerification() {
+						if(!prev.n.sys_id){
+							return true;
+						}
+
+						if(prev.isOwner && prev.n.u_status && (prev.n.u_status.value === 'Draft' || prev.n.u_status.value ===  'Pending Verification')){
+							return true;
+						}
+
+						
+						return false;
+					}	
+					
+					function searchGroup(name){
+						return CommunicatioFactory.groupList({sysparm_query: 'nameLIKE' + name + '^type!=' + groupsTypes.result[0].sys_id + '^ORtype=', sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+							return res.result;
+						});
+
+					}
+					
+					function searchGroupFullList(field){
+						var func = function(value){
+							vm.model[field] = value;
+						}
+						SearchServiceHelper.createSimpleSearch(CommunicatioFactory.groupFullList, 'name', func, 'type!=' + groupsTypes.result[0].sys_id + '^ORtype=');
+					}					
+					
+					function setModel($item, $model, $label, $event, modelField, objectField){
+						prev.n[modelField] = {
+							display_value: $item[objectField],
+							value: $item.sys_id
+						}
+					}					
+					
+
+				},
+				controllerAs: "prev"
+			});				
+			
+		}
+		
+		function isInvalid(field){
+			return field.$invalid && field.$dirty;
+		}
+
+	    function isValid(field){
+			return field.$valid && field.$dirty;
+		}
+		
+        function setModel($item, $model, $label, $event, modelField, objectField){
+			vm.model[modelField] = {
+				display_value: $item[objectField],
+				value: $item.sys_id
+			}
+        }
+
+        function searchLabel(name){
+            return CommunicatioFactory.label({sysparm_query: 'nameLIKE' + name + '^type=Communication Center', sysparm_limit: 30, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+        }
+		
+		
+        function searchLocation(name){
+            return CommunicatioFactory.locationList({sysparm_query: 'nameLIKE' + name, sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+        }
+		
+		function searchLocationFullList(){
+			var func = function(value){
+				vm.model['u_location'] = value;
+			}
+			SearchServiceHelper.createSimpleSearch(CommunicatioFactory.locationFullList, 'name', func, null);
+		}
+        
+		function searchRecord(name){
+            return CommunicatioFactory.taskList({sysparm_query: 'numberLIKE' + name, sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+        }
+		
+		function searchRecordFullList(){
+			var func = function(value){
+				vm.model['u_record'] = value;
+			}
+			SearchServiceHelper.createSimpleSearch(CommunicatioFactory.taskFullList, 'number', func, null);
+		}
+
+        function searchProduct(name){
+            return CommunicatioFactory.productList({sysparm_query: 'name!=""^ORDERBYname^nameLIKE' + name, sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+        }
+		
+		function searchProductFullList(){
+			var func = function(value){
+				vm.model['u_product'] = value;
+			}
+			SearchServiceHelper.createSimpleSearch(CommunicatioFactory.productFullList, 'name', func, 'name!=""');
+		}
+		
+		
+        function searchIncident(number){
+			var sysparmQuery = 'numberLIKE' + number;
+            return CommunicatioFactory.incidentList({sysparm_query: sysparmQuery, sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+        }
+		
+		function searchIncidentFullList(){
+			var func = function(value){
+				vm.model['u_servicenow_ticket'] = value;
+			}
+			SearchServiceHelper.createSimpleSearch(CommunicatioFactory.incidentFullList, 'number', func, null);
+		}
+
+		function searchChangeRequest(number){
+			var sysparmQuery = 'numberLIKE' + number;
+            return CommunicatioFactory.changeRequestList({sysparm_query: sysparmQuery, sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+        }
+		
+		function searchChangeRequestFullList(){
+			var func = function(value){
+				vm.model['u_rfc'] = value;
+			}
+			SearchServiceHelper.createSimpleSearch(CommunicatioFactory.changeRequestFullList, 'number', func, null);
+		}
+		
+		function searchUser(name){
+            return CommunicatioFactory.userList({sysparm_query: 'nameLIKE' + name + '^' + 'ORemailLIKE' + name + '^active=true^sys_class_name=sys_user', sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+		}
+
+
+		function searchUser2Select(name){
+            return CommunicatioFactory.userList({sysparm_query: 'nameLIKE' + name + '^' + 'ORemailLIKE' + name + '^active=true^sys_class_name=sys_user^name!=""', sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                vm.user2Select = res.result.map(function(item){
+					return {
+						display_value: item.name,
+						value: item.sys_id
+					}
+				});
+            });
+		}
+
+		function searchUserFullList(field){
+			if(field == 'typeHeadUser'){
+				var func = function(value){
+					vm.userCollection.push(value);
+				}
+				
+			}else if(field == 'u_maintenance_poc'){
+				var func = function(value){
+					vm.model['u_maintenance_poc'] = value;
+				}
+			}
+			
+			SearchServiceHelper.createSimpleSearch(CommunicatioFactory.userFullList, 'name', func, 'active=true^sys_class_name=sys_user^name!=""');
+		}	
+		
+		function removeUserCollection(){
+			if(vm.usersSelected){
+				vm.usersSelected.forEach(function(selected){
+					vm.userCollection = vm.userCollection.filter(function(user){
+						return user.value !== selected.value;
+					});
+				});
+			}
+		}
+
+		function searchGroup(name){
+            return CommunicatioFactory.groupList({sysparm_query: 'nameLIKE' + name + '^type!=' + groupsTypes.result[0].sys_id + '^ORtype=', sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                return res.result;
+            });
+
+		}
+
+		function searchGroup2Select(name){
+            return CommunicatioFactory.groupList({sysparm_query: 'nameLIKE' + name + '^type!=' + groupsTypes.result[0].sys_id + '^ORtype=', sysparm_limit: 20, preloader: false}).$promise.then(function(res){
+                vm.group2Select = res.result.map(function(item){
+					return {
+						display_value: item.name,
+						value: item.sys_id
+					}
+				});
+            });
+		}
+
+		function searchGroupFullList(field){
+			var func = function(value){
+				vm.groupCollection.push(value);
+			}
+			SearchServiceHelper.createSimpleSearch(CommunicatioFactory.groupFullList, 'name', func, 'type!=' + groupsTypes.result[0].sys_id + '^ORtype=');
+		}	
+		
+		function removeGroupCollection(){
+			if(vm.groupsSelected){
+				vm.groupsSelected.forEach(function(selected){
+					vm.groupCollection = vm.groupCollection.filter(function(group){
+						return group.value !== selected.value;
+					});
+				});
+			}
+		}
+		
+		function initTime() {
+			var t = new Date();
+			t.setHours(0);
+			t.setMinutes(0);
+			vm.u_scheduled_date = t;
+		}
+
+		function pickTime(dateTimestamp) {
+			var newDate = new Date(dateTimestamp);
+			newDate.setHours(vm.u_scheduled_time.getHours());
+			newDate.setMinutes(vm.u_scheduled_time.getMinutes());
+			vm.model.u_scheduled_time = newDate;
+		}
+		
+		function addUser(){
+			vm.selectLeftUsersCollection.forEach(function(user){
+				vm.userCollection.push(user);
+
+				_.remove(vm.user2Select, {value: user.value});
+			});
+
+
+		}
+
+		function removeUser(){
+
+			vm.selectRightUsersCollection.forEach(function(user){
+
+				vm.user2Select.push(user);
+
+				_.remove(vm.userCollection, {value: user.value});
+
+
+			});
+		}		
+
+		function addGroup(){
+			vm.selectLeftGroupsCollection.forEach(function(group){
+				vm.groupCollection.push(group);
+
+				_.remove(vm.group2Select, {value: group.value});
+			});
+
+
+		}
+
+		function removeGroup(){
+
+			vm.selectRightGroupsCollection.forEach(function(group){
+
+				vm.group2Select.push(group);
+
+				_.remove(vm.groupCollection, {value: group.value});
+
+
+			});
+		}
+		
+		function onTagAdded(tag){
+			if(!tag.sys_id){
+				CommunicatioFactory.label({sysparm_query: 'nameLIKE' + tag.name + '^type=Communication Center'}).$promise.then(function(res){
+					if(res.result.length > 0){
+						tag.sys_id = res.result[0].sys_id;
+					}else{
+						CommunicatioFactory.createLabel({name: tag.name, type: 'Communication Center'}).$promise.then(function(res){
+							tag.sys_id = res.result.sys_id;
+						});
+					}
+				});
+			}				
+			
+			console.log(tag)
+		}
+    }
+
+})();
+
+]]></script>
+        <script_name>notification-ctrl</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>anton.sychikov.contractor@weather.com</sys_created_by>
+        <sys_created_on>2016-10-06 13:04:09</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>2b8dc3ed0f12a2006c3005cce1050e61</sys_id>
+        <sys_mod_count>199</sys_mod_count>
+        <sys_name>x_wec_communicatio.notification-ctrl</sys_name>
+        <sys_package display_value="Communications Center" source="x_wec_communicatio">efd54c6e0f06e64034457d4ce1050e7d</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Communications Center">efd54c6e0f06e64034457d4ce1050e7d</sys_scope>
+        <sys_update_name>sys_ui_script_2b8dc3ed0f12a2006c3005cce1050e61</sys_update_name>
+        <sys_updated_by>anton.sychikov.contractor@weather.com</sys_updated_by>
+        <sys_updated_on>2016-11-11 09:36:53</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>
